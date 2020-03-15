@@ -1,0 +1,9 @@
+// 项目基础定义
+@import '@settings';
+// 全局样式重置
+@import '@reset';
+// 项目公共样式
+
+.routerWrapper {
+    height: 100vh;
+}
