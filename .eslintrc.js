@@ -55,7 +55,7 @@ module.exports = {
         // 代码块{}的括号样式，起始大括号跟随语句末尾：警告
         'brace-style': ['warn', '1tbs', { allowSingleLine: true }],
         // 驼峰命名方式：警告
-        camelcase: 'warn',
+        camelcase: ['warn', { allow: ['^UNSAFE_'] }],
         // 减少绑定上下文之外的变量的使用
         'block-scoped-var': 'error',
         // 旨在标记不使用的类方法this：取消
