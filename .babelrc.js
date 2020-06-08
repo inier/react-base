@@ -9,7 +9,7 @@ module.exports = {
                 libraryDirectory: '',
                 camel2DashComponentName: false,
             },
-            'lodash-es',
+            'lodash',
         ],
         ['@babel/plugin-proposal-decorators', { legacy: true }],
     ],

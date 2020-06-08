@@ -2,8 +2,6 @@
 
 // 设备信息相关
 export * from './checkDevice';
-// lodash-es: 支持按需导入，也可单独导入
-export * from 'lodash-es';
 // 基础库
 export * from './baseUtil';
 // UI相关

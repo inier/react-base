@@ -1,5 +1,5 @@
 // 基础方法集
-import _ from 'lodash-es';
+import { upperFirst } from 'lodash-es';
 
 /**
  * get value of name from cookie
@@ -22,7 +22,7 @@ export function getCookie(name) {
  * @returns 操作后值
  */
 export function addPrefix(str, prefix = 'btn') {
-    const arr = _.upperFirst(str.trim()).split(/\s+/);
+    const arr = upperFirst(str.trim()).split(/\s+/);
     const tResult = [];
     for (let i = arr.length - 1; i >= 0; i--) {
         tResult.push(`${prefix}${arr[i]}`);

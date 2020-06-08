@@ -1,5 +1,5 @@
 // 数据相关：Array和Map等
-import _ from 'lodash-es';
+import { each, upperFirst, difference, isEmpty } from 'lodash-es';
 
 /**
  * 对比扁平数组
@@ -14,10 +14,10 @@ export function diffFlatArray(newValue = [], oldValue = []) {
             dels: oldValue,
         };
     }
-    const tNew = _.difference(newValue, oldValue); // 新增
+    const tNew = difference(newValue, oldValue); // 新增
     return {
         adds: tNew,
-        dels: _.difference(oldValue, _.difference(newValue, tNew)), // 删除
+        dels: difference(oldValue, difference(newValue, tNew)), // 删除
     };
 }
 
@@ -54,7 +54,7 @@ export function findDeepByKey(data, { key, value }, seed) {
                 // eslint-disable-next-line no-continue
                 continue;
             }
-            if (!_.isEmpty(tData)) {
+            if (!isEmpty(tData)) {
                 tFindDeepByKey(tData, checkKey);
             }
         }
@@ -95,7 +95,7 @@ export function findLeafForMap(arr = [], seed = 'data') {
  * @returns {array} 返回指定key的value集合 [xx,xxx]
  */
 export function getValuesForMap(data = [], key = 'id') {
-    if (_.isEmpty(data) || data === null) {
+    if (isEmpty(data) || data === null) {
         return [];
     }
     return data.map((item) => {
@@ -207,7 +207,7 @@ export function flatObjectMap(prefix = '', mapKeys = [], flatObj = {}) {
     return tKeys.map((key) => {
         if (mapKeys.includes(key)) {
             return {
-                [key]: `${this.prefix}${_.upperFirst(key)}`,
+                [key]: `${this.prefix}${upperFirst(key)}`,
             };
         } else {
             return { [key]: key };
@@ -216,7 +216,7 @@ export function flatObjectMap(prefix = '', mapKeys = [], flatObj = {}) {
 }
 
 export function flatDataToArr(data = [], seed = 'data') {
-    if (_.isEmpty(data)) {
+    if (isEmpty(data)) {
         return [];
     }
     const result = [];
@@ -224,7 +224,7 @@ export function flatDataToArr(data = [], seed = 'data') {
         data.forEach((item) => {
             const tArr = item[seed];
             result.push(item);
-            if (tArr !== null && !_.isEmpty(tArr)) {
+            if (tArr !== null && !isEmpty(tArr)) {
                 tFlatData(tArr);
             }
         });
@@ -274,7 +274,7 @@ export function renameFlatObject(flatObj, prefix = '', renameKeys = []) {
     return tKeys.map((key) => {
         if (renameKeys.includes(key)) {
             return {
-                [`${this.prefix}${_.upperFirst(key)}`]: flatObj[key],
+                [`${this.prefix}${upperFirst(key)}`]: flatObj[key],
             };
         } else {
             return { [key]: flatObj[key] };
@@ -309,9 +309,9 @@ export function getGenes(data, id, reverse = false) {
     let genes = [];
     const mROOT = '0';
 
-    if (!_.isEmpty(data)) {
+    if (!isEmpty(data)) {
         (function tGetGenes(data, id) {
-            _.each(data, (value, key) => {
+            each(data, (value, key) => {
                 if (id === key) {
                     genes.push(Number(id));
 
