@@ -1,8 +1,5 @@
 // 组件的统一出口
 
-// loader 加载器
-export * from '@ozo/lazy-loader';
-
 // basis 基础组件
 export * from './basis';
 

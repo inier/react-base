@@ -4,7 +4,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import * as serviceWorker from './serviceWorker';
-import { ErrorBoundary } from '@components';
+import { ErrorBoundary } from '@/components';
 import './index.scss';
 
 import App from './App';

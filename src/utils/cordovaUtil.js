@@ -1,13 +1,7 @@
-import moment from 'moment';
-
 /**
- * @description 处理所有观点app上关于cordova的逻辑操作
- * 单例模式
- * @export
- * @class cordovaUtil
+ * @description 处理关于cordova的逻辑操作
  */
 class CordovaUtil {
-    backButonClickTime = moment();
     isCordovaApp = false;
     constructor() {
         if (!CordovaUtil.instance) {
@@ -28,12 +22,7 @@ class CordovaUtil {
                 () => {
                     const path = history.location.pathname;
                     if (path === '/' || path === '/my' || path === '/category' || path === '/cartindex/footer') {
-                        // const now = moment();
-                        // if (now - this.backButonClickTime > 3000) {
-                        //     this.backButonClickTime = now;
-                        // } else {
                         window.navigator.app.exitApp();
-                        // }
                     } else {
                         history.goBack();
                     }
@@ -46,12 +35,13 @@ class CordovaUtil {
     /**
      * @description 关闭启动遮罩页面
      */
-    closeSpleehScrren() {
+    closeSplashScreen() {
         this.runInCodova(() => {
             window.StatusBar.styleDefault();
             window.navigator.splashscreen.hide();
         });
     }
+
     /**
      * @description 确保需要允许的函数能在cordova加载完成后的情况下执行
      * @param {function} fuc 需要执行的函数
@@ -63,6 +53,7 @@ class CordovaUtil {
             window.document.addEventListener('deviceready', fuc, false);
         }
     }
+
     /**
      * @description 设置状态栏的文字为亮色
      */
@@ -71,6 +62,7 @@ class CordovaUtil {
             window.StatusBar.styleBlackOpaque();
         });
     }
+
     /**
      * @description 设置状态栏文字为黑色
      */

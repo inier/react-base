@@ -1,4 +1,4 @@
-import { cloneDeep } from '@utils';
+import { cloneDeep } from '@/utils';
 
 /**
  * 组装数据

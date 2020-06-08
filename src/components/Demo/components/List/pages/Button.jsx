@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Demo } from '@components';
+import { Button, Demo } from '@/components';
 const { DemoShow, Section, Block } = Demo;
 
 class ButtonDemo extends Component {

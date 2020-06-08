@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import { CircularProgress, Snackbar, Slide } from '@material-ui/core';
-import { Button, WingBlank, WhiteSpace } from '@components';
-import { Agent as MAgent, ApiUrls } from '@api';
+import { Button, WingBlank, WhiteSpace } from '@/components';
+import { Agent as MAgent, ApiUrls } from '@/api';
 import styles from './ListWithApi.module.scss';
 
 const Agent = new MAgent();

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card, CardLite, Demo } from '@components';
+import { Button, Card, CardLite, Demo } from '@/components';
 const { DemoShow, Section } = Demo;
 
 export default () => (

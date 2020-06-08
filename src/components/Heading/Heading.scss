@@ -1,4 +1,4 @@
-@import '@settings';
+@import '~@/_settings';
 $headingPrefixCls: '#{$prefix}heading';
 .#{$headingPrefixCls} {
     display: flex;

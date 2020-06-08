@@ -1,5 +1,5 @@
 /** src/routerConfig.js */
-import { Entrance, List, Doc, About } from '@pages';
+import { Entrance, List, Doc, About } from '@/pages';
 
 // 描述路由的协议格式
 const routerConfig = [

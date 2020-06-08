@@ -1,4 +1,4 @@
-import { lazy } from '@components';
+import { lazy } from '@ozo/lazy-loader';
 
 // 组件类型列表
 const typeList = [

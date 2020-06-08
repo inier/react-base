@@ -17,43 +17,24 @@ CRA2 升级的特性，可以参考[英文文档](https://reactjs.org/blog/2018/
 该工程的主要技术特性如下：
 
 -   基于 react 16+
-
 -   基于 babel 7
-
 -   基于 webpack 4
-
 -   ES 6/7 标准语法
-
 -   scss / css modules 样式处理
-
 -   公共 SCSS mixins 支持
-
 -   各类资源统一出口管理
-
 -   基于 fetch 数据请求
-
--   支持 mobx 状态管理*
-
--   支持 Fusion Design 平台，UI 和前端协同*
-
+-   支持 mobx 状态管理\*
+-   支持 Fusion Design 平台，UI 和前端协同\*
 -   支持公共主题可配置
-
 -   Eslint/Stylelint/Prettier 代码规范
-
 -   Markdownlint 规范 [详情](https://github.com/ruanyf/document-style-guide/) [规则](https://github.com/hustcc/lint-md/tree/master/packages/lint-md)
-
 -   代码提交日志规范
-
 -   docz+mdx 的演示文档规范
-
 -   支持 webpack 配置自定义
-
 -   支持第三方库自定义打包配置
-
 -   支持[装饰器 @](https://segmentfault.com/a/1190000018313262) @babel/plugin-proposal-decorators
-
 -   支持[可选链运算符 ?.](https://segmentfault.com/a/1190000021167608?utm_source=tag-newest) @babel/plugin-proposal-optional-chaining
-
 -   支持[空位合并运算符 ??](https://segmentfault.com/a/1190000021167608?utm_source=tag-newest) @babel/plugin-proposal-nullish-coalescing-operator
 
 更多特性，赶快体验！
@@ -70,53 +51,54 @@ CRA2 升级的特性，可以参考[英文文档](https://reactjs.org/blog/2018/
 │   ├── xxx.js  	 	       	 # 各自定义配置项
 │   └── index.js	  	     	 # 自定义配置项的统一export
 │
-├── doc/            		  	 # 文档目录，存放项目相关文档
-├── docz/            		  	 # docz自定义配置目录，勿改
+├── docs/            		  	 # 文档目录，存放项目相关文档
 ├── node_modules/   		  	 # node依赖模块，安装组件后自动创建
 ├── public/         		  	 # 静态文件
-│   └── favicon.ico 		  	 # H5 icon，浏览器地址栏图标
-│   └── icon-*.png  		   	 # Web App应用图标，默认包括1x和3x两种尺寸
-│   └── iconfont.css  	  	     # 字体图标css（woff为base64，.eot/ttf/svg等从alicdn获取）
-│   └── index.html  		  	 # 应用入口页模板，如果要引入第三方JS可以放在这个目录*
-│   └── manifest.json		  	 # Web App配置文件
+│   ├── favicon.ico 		  	 # H5 icon，浏览器地址栏图标
+│   ├── ie.html  		       	 # ie及低版本浏览器兼容提示
+│   ├── index.html  		  	 # 应用入口页模板，如果要引入第三方JS可以放在这个目录*
+│   ├── logo*.png  		     	 # Web App应用图标，默认包括1x和3x两种尺寸
+│   ├── manifest.json		  	 # Web App配置文件
+│   └── robots.txt		    	 # robots协议配置文件
 │
 ├── src/             		  	 # 项目root
 │   ├── mock/           		 # mock目录，根据项目需要创建
 │   ├── api/         		  	 # 项目api相关
 │   	├── Agent.js    	  	 # 接口请求处理逻辑，默认采用fetch
-│   	├── ApiUrl.js   		 # 接口请求api地址注册
-│   	├── ResponseCode.js	     # 错误码定义
-│   	└── index.js    		 # 接口的统一export
+│   	├── ApiUrl.js   	  	 # 接口请求api地址注册
+│   	├── ResponseCode.js	   # 错误码定义
+│   	└── index.js      		 # 接口的统一export
 │
 │   ├── assets/      		  	 # 公共静态资源（组件除外），如图片/字体/json等，文件名一律小写
 │   	├── font/      		  	 # 公共字体
 │   	├── img/      		  	 # 公共图片，应当按模块分文件夹存放
 │   	└── index.js    	  	 # 公共资源的统一export
 │
-│   ├── components/	      	 	 # 组件集合（展示型组件），用于存放与业务无关的、可复用的组件
+│   ├── components/	       	 # 组件集合，用于存放与业务无关的（展示型组件）、可复用的组件
 │   	├── xxx/      		  	 # xxx组件
 │   		├── components/   	 # 组件独有的子组件，目录结构与父级一致
 │   		├── img/      	  	 # 组件的图片目录
-│   		├── xxx.jsx	    	 # 组件的jsx文件
-│   		├── xxx.scss    	 # 组件的scss文件，按需选择
+│   		├── xxx.jsx	      	 # 组件的jsx文件
+│   		├── xxx.scss    	   # 组件的scss文件，按需选择
 │   		├── xxx.module.scss  # 组件的scss文件，开启css-modules，按需选择
 │   		├── xxx.mdx	  	  	 # 组件的说明文档（功能复杂组件可选）
-│   	    └── index.js 	  	 # 组件的export
+│   	  └── index.js 	    	 # 组件的export
 │   	├── basis.js*   	  	 # 基础组件的统一export
 │   	├── block.js*   	  	 # 简单组件的统一export
 │   	├── index.js    	  	 # 所有组件的统一export
 │   	├── layout.js*  	  	 # 布局组件的统一export
 │   	├── module.js*  	  	 # 复杂组件的统一export
-│   	└── template.js*		 # 模板组件的统一export
+│   	└── template.js*		   # 模板组件的统一export
 │
-│   ├── layouts/     			 # 项目布局集合，用于路由分层
-│   	├── xxxLayout/  		 # xxx布局组件
-│   		├── components/ 	 # 布局独有的子组件，目录结构与通用组件一致
-│   		├── style/     		 # 布局主题scss文件
+│   ├── layouts/     		  	 # 项目布局集合，用于路由分层
+│   	├── xxxLayout/  	  	 # xxx布局组件
+│   		├── components/   	 # 布局独有的子组件，目录结构与通用组件一致
+│   		├── style/     		   # 布局主题scss文件
 │   		├── xxx.jsx	      	 # 组件的jsx文件
 │   		├── xxx.scss      	 # 组件的scss文件
 │   		├── xxx.module.scss	 # 组件的scss文件,开启css-modules
-│   	    └── index.js 	  	 # 布局的export
+│       ├── menuConfig.js 	 # 菜单配置（顶部导航/侧边导航/底部导航等）
+│   	  └── index.js 	    	 # 布局的export
 │   	└── index.js    	  	 # 布局的统一export
 │
 │   ├── modules/    		  	 # 项目独有组件集合（目录结构与layouts一致）
@@ -124,12 +106,12 @@ CRA2 升级的特性，可以参考[英文文档](https://reactjs.org/blog/2018/
 │   	└── index.js	  	  	 # 容器组件相关的统一export
 │
 │   ├── pages/      		  	 # 页面级组件，用于组合modules/layouts等，目录结构=通用组件
-│   	├── xxx/  			  	 # 各页面目录
+│   	├── xxx/  			    	 # 各页面目录
 │   	└── index.js      		 # 页面的统一export
 │
 │   ├── routes/      		  	 # 路由相关（提供多种路由设计方式，供参考）
 │   	├── flatRoutes/  	  	 # 统一的route配置
-│   	└── layoutRoutes/  	  	 # route按layout分层配置
+│   	└── layoutRoutes/  	   # route按layout分层配置
 │
 │   ├── stores/      		  	 # 数据store相关，与mobx等库配合
 │   	├── PersistData.js    	 # 数据持久化处理
@@ -137,8 +119,8 @@ CRA2 升级的特性，可以参考[英文文档](https://reactjs.org/blog/2018/
 │   	└── index.js	  	  	 # store相关的统一export
 │
 │   ├── utils/      		  	 # 辅助工具集合，项目通用方法、函数等
-│   	├── xxx.js  	 	   	 # 各辅助工具
-│   	└── index.js	  		 # 辅助工具类的统一export
+│   	├── xxx.js  	 	    	 # 各辅助工具
+│   	└── index.js	  	  	 # 辅助工具类的统一export
 │
 │   ├── _settings.scss			 # 项目scss变量定义，用于重置基础变量
 │   ├── App.js      		  	 # 顶级路由
@@ -146,45 +128,53 @@ CRA2 升级的特性，可以参考[英文文档](https://reactjs.org/blog/2018/
 │   ├── App.test.js
 │   ├── index.js    		  	 # React入口js
 │   ├── index.css / .scss
-│   ├── menuConfig.js 			 # 菜单配置（顶部导航/侧边导航/底部导航等）
 │   ├── polyfill-dynamic.js  # 浏览器补丁相关
 │   ├── polyfill.js    			 # 浏览器补丁相关
-│   ├── router.jsx		 	  	 # 全局路由处理逻辑
+│   ├── router.js		 	    	 # 全局路由处理逻辑
 │   ├── routerConfig.js 		 # 全局路由配置
 │   ├── serviceWorker.js
 │   ├── setupProxy.js 			 # 全局代理配置
 │   └── vendorConfig.js 		 # 用于配置第三方库splitting的范围
 │
 ├── style/           			   # style相关
-│   ├── _reset.scss 		     # 全局reset规则，项目不可修改
 │   ├── _default.scss  			 # 默认出口，包含全局变量覆盖、全部基础组件，用于编译css
-│   └── _settings.scss  		 # 基础变量出口，用于组件开发引入，仅包括公用的mixins和utils
+│   ├── _reset.scss 		     # 全局reset规则，项目不可修改
+│   └── _settings.scss  		 # 基础变量出口，用于组件开发引入，仅包括公用的 mixins 和utils
 │
 ├── tests/          		  	 # 存放测试用例
-├── .babelrc				     # babel自定义配置文件
+├── .babelrc				         # babel 自定义配置文件
+├── .commitlintrc.js	    	 # 提交日志规范相关
 ├── .editorconfig       		 # 编辑器配置文件
-├── .env		       	    	 # 环境变量配置文件，公共变量配置
-├── .env-cmdrc        			 # 环境变量配置文件，不同环境的变量配置
+├── .env		       	      	 # 环境变量配置文件，公共变量配置
+├── .env-cmdrc.test.js  		 # 环境变量测试文件
+├── .env-cmdrc.js      			 # 环境变量配置文件，不同环境的变量配置
 ├── .eslintignore     			 # eslint 忽略配置，类似 .gitignore
 ├── .eslintrc.js       			 # eslint 配置文件
+├── .gitattributes           # 指定由 git 使用的文件和路径的属性
+├── .gitignore               # git 提交忽略配置文件
+├── .lintmdrc                # markdownlint 配置文件
+├── .lintstagedrc.js         # lint-staged 配置文件
+├── .npmignore               # npm 提交忽略配置文件
+├── .nvmrc                   # 配置项目所使用的 node 版本（采用nvm管理node版本）
 ├── .prettierignore     		 # prettier 忽略配置，类似 .gitignore
 ├── .prettierrc.js   	  		 # prettier 配置文件
 ├── .stylelintignore	  		 # stylelint 忽略配置，类似 .gitignore
 ├── .stylelintrc.js			     # stylelint 配置文件
-├── .commitlintrc.js	    	 # 提交日志规范相关
+├── .yarnrc                  # yarn 配置文件
 ├── config-overrides.js			 # 在不eject的情况下，扩展webpack配置
-├── doczrc.js				     # docz配置文件
-├── package.json		    	 # 包含项目的基本信息、项目的依赖以及项目的相关执行命令等
+├── jsconfig.json            # 指定根文件和js语言服务提供的功能选项
+├── package.json		      	 # 包含项目的基本信息、项目的依赖以及项目的相关执行命令等
+├── package-lock.json        # npm 依赖包版本lock
+├── README.md					       # 描述此项目的功能、特点、API 等信息
 ├── server.js       	  		 # 本地构建服务器
 ├── server.test.js  	  		 # 本地开发测试服务器
-└── README.md					 # 描述此项目的功能、特点、API 等信息
+└── yarn.lock                # yarn 依赖包版本lock
 ```
 
 以上结构是项目的推荐结构；文件名后带有\*的，用于组件的层级划分。
 
 > 以上未提及的文件夹或文件，不用关注。
->
-> craco.config.js 用于配置在另外一种在不 eject 的情况下，扩展 webpack 的方式。（测试版本）
+> 以上的统一export不包括第三方组件。
 
 ### 命名规范
 
@@ -372,31 +362,17 @@ import { Button } from '@alifd/next';
 
 #### 使用全局别名
 
-在 `config-overrides.js`中，通过`addWebpackAlias`方法进行引入，默认已定义的一些别名如下：
+已定义以下全局别名：
 
 ```plain
-module.exports = override(
-    ...
-    addWebpackAlias({
-    	['@node_modules']: path.resolve(__dirname, 'node_modules'),
-        ['@reset']: path.resolve(__dirname, 'style/basis/reset'),   // style样式重置文件别名
-        ['@settings']: path.resolve(__dirname, 'src/settings'),		// style公共配置文件别名，包括mixins和utils等
-        ['@api']: path.resolve(__dirname, 'src/api'),				// api接口相关别名
-        ['@assets']: path.resolve(__dirname, 'src/assets'),			// 项目公共资源文件夹别名
-        ['@components']: path.resolve(__dirname, 'src/components'), // 项目组件文件夹别名
-        ['@layouts']: path.resolve(__dirname, 'src/layouts'),       // layouts文件夹别名
-        ['@modules']: path.resolve(__dirname, 'src/modules'),       // modules文件夹别名
-        ['@pages']: path.resolve(__dirname, 'src/pages'),			// pages文件夹别名
-        ['@utils']: path.resolve(__dirname, 'src/utils'),			// utils文件夹别名
-        ['@stores']: path.resolve(__dirname, 'src/stores'),			// stores文件夹别名
-    }),
-   ...
-);
+{
+    ['@']: resolve('src'),
+    ['@style']: resolve('style'),  // style样式重置文件别名
+}
 ```
 
-> @reset 和 @settings 别名当采用 style 目录中的全局配置来配置组件时才需要引入。
->
-> 使用别名，scss 名称@import 时需要写完整，\_ 和 .scss 后缀名不能少。
+> 使用别名，scss 名称@import 时需要写完整，文件名中的\_ 和 .scss 后缀名不能少。
+> 使用第三方库的 css 时，可以通过`~`引入或写全`node_modules`的路径。
 
 #### 修改入口页标题
 
@@ -594,7 +570,7 @@ const Login =()=><Async load={import('./Login')}/>
 在`src/setupProxy.js`中参照一下配置：
 
 ```js
-module.exports = function(app) {
+module.exports = function (app) {
     app.use(
         proxy('/api', {
             target: 'http://localhost',

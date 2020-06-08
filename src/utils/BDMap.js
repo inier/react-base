@@ -1,7 +1,7 @@
 /**
  * @description 初始化百度js
  */
-import img from '../pages/dealer/img/marker.png';
+import img from '@/assets/img/marker.png';
 
 class BDMap {
     constructor(renderId, zoom) {

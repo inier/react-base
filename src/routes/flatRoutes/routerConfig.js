@@ -1,6 +1,6 @@
 /** src/routerConfig.js */
-import { MainLayout, BlankLayout } from '@layouts';
-import { Entrance, List, Doc, About, NotFound } from '@pages';
+import { MainLayout, BlankLayout } from '@/layouts';
+import { Entrance, List, Doc, About, NotFound } from '@/pages';
 
 // 描述路由的协议格式
 const routerConfig = [

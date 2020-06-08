@@ -68,7 +68,7 @@ import 'core-js/fn/promise/finally';
 require('raf').polyfill(window);
 
 // CustomEvent() constructor functionality in IE9, IE10, IE11
-(function() {
+(function () {
     if (typeof window.CustomEvent === 'function') {
         return false;
     }

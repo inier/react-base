@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { BasePage, Header, PageContainer } from '@components';
-import Navigater from '@utils/Navigator';
+import { BasePage, Header, PageContainer } from '@/components';
+import Navigater from '@/utils/Navigator';
 import blackList from './blacklist';
 /**
  * @description 带Header的IFrame容器，通过路由跳转过来需要携带title和url两个参数

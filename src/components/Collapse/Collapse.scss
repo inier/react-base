@@ -1,4 +1,4 @@
-@import '@settings';
+@import '~@/_settings';
 $collapsePrefixCls: '#{$prefix}collapse';
 .#{$collapsePrefixCls} {
     position: relative;

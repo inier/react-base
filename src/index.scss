@@ -1,7 +1,7 @@
 // 项目基础定义
-@import '@settings';
+@import '~~@/_settings';
 // 全局样式重置
-@import '@reset';
+@import '~@style/_reset';
 // 项目公共样式
 
 .routerWrapper {

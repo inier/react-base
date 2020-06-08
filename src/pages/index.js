@@ -1,4 +1,4 @@
-import { lazy } from '@components';
+import { lazy } from '@ozo/lazy-loader';
 
 // import Entrance from './Entrance';
 const Entrance = lazy(() => import('./Entrance'));

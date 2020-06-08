@@ -1,4 +1,4 @@
-@import '@settings';
+@import '~@/_settings';
 // btn margin计算
 @mixin btn-margin {
     margin-right: $btn-group-margin-v;

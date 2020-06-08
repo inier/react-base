@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
-import { Collapse, List } from '@components';
+import { Collapse, List } from '@/components';
 import typeList from './config.js';
 
 const Panel = Collapse.Panel;
