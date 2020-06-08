@@ -1,6 +1,6 @@
 // index/js ：应用入口，引入全局兼容等
 // 低版本浏览器兼容
-// import './polyfill';
+// import '@/utils/polyfill';
 import React from 'react';
 import { render } from 'react-dom';
 import * as serviceWorker from './serviceWorker';

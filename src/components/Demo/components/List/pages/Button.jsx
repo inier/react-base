@@ -28,6 +28,27 @@ class ButtonDemo extends Component {
 
                         <Button size="xl">btn-xl</Button>
                     </Block>
+                    <Block title="inline">
+                        <Button size="xs">btn-xs</Button>
+                        <Button size="xs" disabled>
+                            btn-xs disabled
+                        </Button>
+                        <Button size="xs" noRadius>
+                            btn-xs noRadius
+                        </Button>
+                        <Button size="xs" active>
+                            btn-xs active
+                        </Button>
+
+                        <Button size="sm">btn-sm</Button>
+
+                        <Button size="md">btn-md</Button>
+                        <Button>btn-md(默认)</Button>
+
+                        <Button size="lg">btn-lg</Button>
+
+                        <Button size="xl">btn-xl</Button>
+                    </Block>
                 </Section>
                 <Section title="type">
                     <Block flex>
@@ -83,7 +104,7 @@ class ButtonDemo extends Component {
                         <Button icon="icon-home">btn-icon</Button>
                     </Block>
                 </Section>
-                <Section title="else">
+                <Section title="status">
                     <Block flex>
                         <Button type="primary" noRadius>
                             btn-primary noRadius
@@ -104,7 +125,10 @@ class ButtonDemo extends Component {
                         <Button type="secondary" full>
                             btn-secondary full
                         </Button>
-
+                    </Block>
+                </Section>
+                <Section title="group">
+                    <Block flex>
                         <div className="btn-group">
                             <Button type="primary" noRadius>
                                 btn-primary noRadius

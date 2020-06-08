@@ -1,6 +1,6 @@
 import { lazy } from '@ozo/lazy-loader';
 
-// import Entrance from './Entrance';
+// import Entrance from './Entrance/index';
 const Entrance = lazy(() => import('./Entrance'));
 const List = lazy(() => import('./List'));
 const Doc = lazy(() => import('./Doc'));

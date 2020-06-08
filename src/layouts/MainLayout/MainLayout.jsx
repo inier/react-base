@@ -1,6 +1,6 @@
 import React from 'react';
 import { BasePage, Header, PageContainer } from '@/components';
-import Footer from './components/Footer';
+import Footer from './components/Footer/index';
 import { getPageTitle } from '@/utils';
 import routerData from '@/routerConfig';
 import mainRoutes from './MainRoutes';

@@ -16,4 +16,4 @@ export * from './layout';
 export * from './template';
 
 // demo 演示相关
-export * from './Demo';
+export * from './Demo/index';

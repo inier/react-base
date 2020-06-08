@@ -1,16 +1,37 @@
 {
     "compilerOptions": {
-        "experimentalDecorators": true,
-        "emitDecoratorMetadata": true,
+        "target": "es6",
         "module": "es6",
         "jsx": "react",
-        "allowSyntheticDefaultImports": true,
         "baseUrl": "src",
         "paths": {
-            "@/*": ["src/*"],
-            "@style/*": ["style/*"]
-        }
+            "@/api": ["api/index.js"],
+            "@/api/*": ["api/*"],
+            "@/assets": ["assets/index.js"],
+            "@/assets/*": ["assets/*"],
+            "@/components": ["components/index.js"],
+            "@/components/*": ["components/*"],
+            "@/layouts": ["layouts/index.js"],
+            "@/layouts/*": ["layouts/*"],
+            "@/mock": ["mock/index.js"],
+            "@/mock/*": ["mock/*"],
+            "@/modules": ["modules/index.js"],
+            "@/modules/*": ["modules/*"],
+            "@/pages": ["pages/index.js"],
+            "@/pages/*": ["pages/*"],
+            "@/routes": ["routes/index.js"],
+            "@/routes/*": ["routes/*"],
+            "@/routerConfig": ["routerConfig.js"],
+            "@/stores": ["tores/index.js"],
+            "@/stores/*": ["stores/*"],
+            "@/utils": ["utils/index.js"],
+            "@/utils/*": ["utils/*"],
+            "@/*": ["*"]
+        },
+        "allowSyntheticDefaultImports": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true
     },
-    "include": ["./src/**/*"],
-    "exclude": ["node_modules", "build"]
+    "exclude": ["node_modules", "build"],
+    "include": ["src/**/*"]
 }
