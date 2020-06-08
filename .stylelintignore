@@ -5,7 +5,7 @@ build/
 dist/
 tests/
 demo/
-docs/
+doc/
 style/
 
 # node 覆盖率文件

@@ -51,7 +51,7 @@ CRA2 升级的特性，可以参考[英文文档](https://reactjs.org/blog/2018/
 │   ├── xxx.js  	 	       	 # 各自定义配置项
 │   └── index.js	  	     	 # 自定义配置项的统一export
 │
-├── docs/            		  	 # 文档目录，存放项目相关文档
+├── doc/            		  	 # 文档目录，存放项目相关文档
 ├── node_modules/   		  	 # node依赖模块，安装组件后自动创建
 ├── public/         		  	 # 静态文件
 │   ├── favicon.ico 		  	 # H5 icon，浏览器地址栏图标
@@ -174,7 +174,7 @@ CRA2 升级的特性，可以参考[英文文档](https://reactjs.org/blog/2018/
 以上结构是项目的推荐结构；文件名后带有\*的，用于组件的层级划分。
 
 > 以上未提及的文件夹或文件，不用关注。
-> 以上的统一export不包括第三方组件。
+> 以上的统一 export 不包括第三方组件。
 
 ### 命名规范
 
@@ -256,7 +256,7 @@ CRA2 升级的特性，可以参考[英文文档](https://reactjs.org/blog/2018/
 
 ##### SCSS 通用处理
 
--   **重置通用样式：**通过`src/_settings.scss`覆盖`scss/_settings.scss`中指定的变量进行重置。
+-   **重置通用样式：**通过`src/_settings.scss`覆盖`style/_settings.scss`中指定的变量进行重置。
 
 ##### 定义 SCSS 变量
 
@@ -264,9 +264,9 @@ CRA2 升级的特性，可以参考[英文文档](https://reactjs.org/blog/2018/
 
 第二部：在组件的 scss 文件头部引入`src/_settings.scss`
 
-```plain
-@import "../../settings";     //引入路径根据组件scss文件位置进行修正
-.content{
+```scss
+@import '~@style/_settings'; //引入路径根据组件scss文件位置进行修正
+.content {
     color: $modal-color;
 }
 ```
@@ -275,8 +275,8 @@ CRA2 升级的特性，可以参考[英文文档](https://reactjs.org/blog/2018/
 
 脚手架默认引入了一些常用的 mixins，使用方法参考：https://github.com/inier/mixins。
 
-```plain
-@import "../../settings";     //引入路径根据组件scss文件位置进行修正
+```scss
+@import '~@style/_settings'; //引入路径根据组件scss文件位置进行修正
 
 /*-------- 极细边框 --------*/
 // 上、右、下、左边框
@@ -289,7 +289,7 @@ CRA2 升级的特性，可以参考[英文文档](https://reactjs.org/blog/2018/
 }
 ```
 
-此外，也可以在`scss/_mixins.scss`文件中自定义 mixins。
+此外，也可以在`style/_settings.scss`文件中自定义 mixins。
 
 ##### 编写 CSS 样式
 
@@ -364,7 +364,7 @@ import { Button } from '@alifd/next';
 
 已定义以下全局别名：
 
-```plain
+```js
 {
     ['@']: resolve('src'),
     ['@style']: resolve('style'),  // style样式重置文件别名
@@ -388,10 +388,10 @@ css 样式可以选择是否开启 CSS-Module 功能，先介绍不开启的方�
 
 第 1 步： 样式文件命名为 xxx.scss;
 
-```plain
-.content{
+```scss
+.content {
     padding: 10px;
-    .logo{
+    .logo {
         width: 40px;
     }
 }
@@ -399,7 +399,7 @@ css 样式可以选择是否开启 CSS-Module 功能，先介绍不开启的方�
 
 第 2 步：在 jsx 中引入时使用`import './xxx.scss';`
 
-```plain
+```js
 import './xxx.scss';
 ...
 <main className="content">
@@ -413,10 +413,10 @@ import './xxx.scss';
 
 第 1 步： 样式文件命名为 xxx.module.scss;
 
-```plain
-.content{
+```scss
+.content {
     padding: 10px;
-    .logo{
+    .logo {
         width: 40px;
     }
 }
@@ -424,7 +424,7 @@ import './xxx.scss';
 
 第 2 步：在 jsx 中引入时使用`import styles from './xxx.module.scss';`
 
-```plain
+```js
 import styles from './xxx.module.scss';
 ...
 <main className={styles.content}>
@@ -438,26 +438,6 @@ import styles from './xxx.module.scss';
 
 样式继承：开启 CSS-Module 功能后，样式继承请使用[如下方法](https://github.com/css-modules/css-modules#dependencies)。
 
-##### 使用 SCSS mixins
-
-脚手架默认引入了一些常用的 mixins，使用方法参考：https://github.com/inier/mixins。
-
-```plain
-@import "../../settings";     //引入路径根据组件scss文件位置进行修正
-
-/*-------- 极细边框 --------*/
-// 上、右、下、左边框
-.border-t {
-    @include onepx-scale(#eee, top, after, 2px);
-}
-
-.border-r {
-    @include onepx-scale(#eee, right, after, 2px);
-}
-```
-
-此外，也可以在`scss/_mixins.scss`文件中自定义 mixins。
-
 #### 使用字体图标
 
 当需要使用字体图标的时候，可以参照以下方法。
@@ -469,21 +449,21 @@ import styles from './xxx.module.scss';
 上传好图标后，在网站上生成在线链接（font class），复制该链接，使用它替换掉`.env`文件中的`REACT_APP_ICONFONT_URL`字段：
 
 ```plain
-# REACT_APP_ICONFONT_URL=//at.alicdn.com/t/font_1357840_n8433ier959.css
+# REACT_APP_ICONFONT_URL="//at.alicdn.com/t/font_xxx_xxx.css"
 ```
 
 然后修改`public/index.html`即可。
 
-```plain
- <!-- <link rel="stylesheet" href="%REACT_APP_ICONFONT_URL%"> -->
- 变为
- <link rel="stylesheet" href="%REACT_APP_ICONFONT_URL%">
+```html
+<!-- <link rel="stylesheet" href="%REACT_APP_ICONFONT_URL%"> -->
+变为
+<link rel="stylesheet" href="%REACT_APP_ICONFONT_URL%" />
 ```
 
 > 本地引入方式：[仅自建 CDN 的情况下使用]。在[阿里巴巴 iconfont](http://www.iconfont.cn)中上传图标，然后在网站上生成在线链接（font class），访问该链接并复制其中的内容。在`public`目录中新建`iconfont.css`，将刚复制的内容粘贴到该文件中，然后在`public/index.html`目录中引入该链接即可。
 
-```plain
- <link rel="stylesheet" href="./iconfont.css">
+```html
+<link rel="stylesheet" href="./iconfont.css" />
 ```
 
 > 这种方式需要注意 cdn 缓存问题，建议在 CDN 规则中不缓存该文件的图标。对于频繁更新的情况，可以采用其他手段将其 hash 化。
@@ -502,7 +482,7 @@ import styles from './xxx.module.scss';
 
 推荐采用 Icon 组件统一处理字体图标，返回类似以下结构：
 
-```plain
+```js
 <i className={`iconfont icon-${icon} ${className || ""}`} style={style || {color: fontSize: size }} />
 或
 <i className={`iconfont ${icon} ${className || ""}`} style={style || {color: fontSize: size }} />
@@ -514,7 +494,7 @@ import styles from './xxx.module.scss';
 
 Icon 在代码中的用法：
 
-```plain
+```js
 <Icon icon="arrow-left" size="12px" />
 或
 <Icon icon="icon-arrow-left" size="12px" />
@@ -601,14 +581,14 @@ mobx5 新增，因采用 Proxy 对象，部分机型不支持。
 
 mobx 开启严格模式，必须使用@action 来修改数据
 
-```plain
+```js
 // mobx5 特定值，  //https://cn.mobx.js.org/refguide/api.html  +  https://blog.csdn.net/smk108/article/details/83185745
 configure({
     enforceActions: 'observed',
 });
 // mobx4
 configure({
-    enforceActions: true
+    enforceActions: true,
 });
 
 // mobx3及以下
@@ -730,9 +710,9 @@ http://www.cnblogs.com/cnblogsfans/p/5075073.html
 
 1. 安装 env-cmd
 
-2. 在根目录新建**.env-cmdrc**文件，用于自定义不同环境的环境变量，这里配置的变量会覆盖`.env.local`文件中的对应变量，内容类似：
+2. 在根目录新建**.env-cmdrc.js**文件，用于自定义不同环境的环境变量，这里配置的变量会覆盖`.env.local`文件中的对应变量，内容类似：
 
-    ```plain
+    ```js
     {
       "development": {
       },
@@ -749,7 +729,7 @@ http://www.cnblogs.com/cnblogsfans/p/5075073.html
 
 3. 在 package.json 中注册脚本命令，根据自己的需要指定环境，多个环境可以共用，用`,`分隔：
 
-    ```plain
+    ```js
     "scripts": {
         "start": "env-cmd development,h5 react-app-rewired start",
         "build": "env-cmd production react-app-rewired build",
@@ -776,7 +756,7 @@ REACT_APP_VERSION=1.0
 
 jsx 中使用：
 
-```plain
+```jsx
 render() {
   return (
     <div>
@@ -791,15 +771,15 @@ render() {
 
 js 中使用：
 
-```plain
+```js
 if (process.env.NODE_ENV !== 'production') {
-  analytics.disable();
+    analytics.disable();
 }
 ```
 
 html 中使用：
 
-```plain
+```html
 <title>%REACT_APP_WEBSITE_NAME%</title>
 ```
 
@@ -807,7 +787,7 @@ html 中使用：
 
 CRA2 支持 workbox，可以一键开启 PWA（Progressive Web App）。在`src/index.js` 文件中有以下代码：
 
-```plain
+```js
 serviceWorker.unregister();
 ```
 
@@ -828,7 +808,7 @@ http://eslint.cn/docs/user-guide/configuring#disabling-rules-with-inline-comment
 
 跟 eslint 类似，通过 `stylelint-disable` 注释来局部禁用某一项规则。通过 `stylelint-enable` 可以把之前忽略的规则重新开启。一定要注意，只 enable 对应的规则，形成呼应：
 
-```plain
+```html
 <style>
     .classA {
         /* stylelint-disable declaration-block-no-duplicate-properties */
@@ -843,7 +823,7 @@ http://eslint.cn/docs/user-guide/configuring#disabling-rules-with-inline-comment
 
 cra 通过 GENERATE_SOURCEMAP 来控制 sourcemap 的开启和关闭，在.env-cmdrc 文件中对应的环境下，增加"GENERATE_SOURCEMAP": false, false 为关闭 sourcemap，true 为开启 sourcemap。
 
-```plain
+```js
 {
   "development": {
     "REACT_APP_HMR": false
@@ -916,29 +896,29 @@ HTTPS=true npm start
 
     方法一：
 
-    ```plain
+    ```js
     const webpack = require('webpack');
 
     module.exports = {
-      // ...
-      plugins: [
-        // 打包指定需要的语言文件
-        new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /zh-cn|ja/)
-      ]
+        // ...
+        plugins: [
+            // 打包指定需要的语言文件
+            new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /zh-cn|ja/),
+        ],
     };
     ```
 
     方法二：
 
-    ```plain
+    ```js
     const webpack = require('webpack');
 
     module.exports = {
-      // ...
-      plugins: [
-        // 只打包有过引用的语言文件，应用中需要添加如：`import 'moment/locale/zh-cn';`
-        // new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
-      ]
+        // ...
+        plugins: [
+            // 只打包有过引用的语言文件，应用中需要添加如：`import 'moment/locale/zh-cn';`
+            // new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+        ],
     };
     ```
 
