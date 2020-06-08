@@ -27,7 +27,6 @@ Thumbs.db
 .settings
 .buildpath
 .vscode/chrome/
-.vscode/settings.json
 /**/.sass-cache
 .*proj
 .svn/
