@@ -1,10 +1,9 @@
 /*
  * required polyfills
+ * IE8兼容依赖public/polyfill-ie8.js实现。
  * 用于IE9-11及其他低版本现代浏览器的兼容(多种方法，择优而取)
  * 用法：参见 doc/低版本浏览器兼容.md
  */
-
-/** IE8兼容依赖public/polyfill-ie8.js实现。 */
 
 /**
  * 方法1：babel自动导入[默认]
@@ -14,14 +13,15 @@
 
 /**
  * 方法2：dynamic polyfill
+ * https://polyfill.io/v3/
+ * https://github.com/pascalaoms/dynamic-polyfill
  */
-//import './polyfill-dynamic';
 
 /**
  * 方法3：手动按浏览器版本引入
  * https://github.com/facebook/create-react-app/tree/master/packages/react-app-polyfill
  */
-//import 'react-app-polyfill/ie9';
+// import 'react-app-polyfill/ie9';
 // import 'react-app-polyfill/ie11';
 
 /**

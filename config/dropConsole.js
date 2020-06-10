@@ -7,8 +7,8 @@ const dropConsole = (DROP_CONSOLE = 'true') => (config) => {
     // https://github.com/AwesomeDevin/drop-console-webpack-plugin
     const DropConsoleWebpackPlugin = require('drop-console-webpack-plugin');
     config.plugins.push(new DropConsoleWebpackPlugin());
-
     console.log('--- drop console ---');
+
     return config;
 };
 

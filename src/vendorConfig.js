@@ -1,4 +1,4 @@
-/** src/vendorConfig.js */
+// src/vendorConfig.js
 /**
  * 用于配置第三方库分拆方法extractVendors的范围（暂停用）
  * 配置方式1：vendors are defined as: [['moduleA', 'moduleB'], ['moduleC', 'moduleD']]

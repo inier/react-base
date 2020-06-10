@@ -8,6 +8,7 @@ const environments = new Set(Object.keys(envCmd));
 const envKeys = new Set([
     'NODE_ENV',
     'REACT_APP_NAME',
+    'REACT_APP_TITLE',
     'REACT_APP_VERSION',
     'PUBLIC_URL',
     '|',

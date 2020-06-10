@@ -1,5 +1,5 @@
 // 优化lodash打包
-const optimizeMoment = () => (config) => {
+const optimizeMoment = (lang='zh-cn') => (config) => {
     if (process.env.NODE_ENV !== 'production') {
         return config;
     }
@@ -8,7 +8,7 @@ const optimizeMoment = () => (config) => {
     const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
     config.plugins.push(
         new MomentLocalesPlugin({
-            localesToKeep: ['zh-cn'],
+            localesToKeep: [lang],
         })
     );
 

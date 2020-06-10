@@ -1,5 +1,5 @@
 // 代码优化压缩: 在react-scripts 2.1.5的基础上增加了去除console的功能
-const minimizer = () => (config) => {
+const minimizer = ({drop_console=true}) => (config) => {
     if (process.env.NODE_ENV !== 'production') {
         return config;
     }
@@ -33,7 +33,7 @@ const minimizer = () => (config) => {
                         // Pending futher investigation:
                         // https://github.com/terser-js/terser/issues/120
                         inline: 2,
-                        drop_console: true,
+                        drop_console: drop_console,
                     },
                     mangle: {
                         safari10: true,

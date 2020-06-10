@@ -1,4 +1,5 @@
-/** src/setupProxy.js */
+// src/setupProxy.js
+
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
 // 开发环境代理配置

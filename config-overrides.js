@@ -15,6 +15,7 @@ const {
     disableEsLint,
     enableEslintTypescript,
     fixBabelImports,
+    useEslintRc,
     useBabelRc,
     setWebpackOptimizationSplitChunks,
 } = require('customize-cra');
@@ -23,18 +24,23 @@ const {
 const {
     buildFriendly,
     speedMeasure,
-    webpackAlias,
+    prerender,
+    rewireReactHotLoader,
+    vConsole,
+    getWebpackAlias,
+    extractVendors,
+    vendorConfig,
     addStylelint,
     minimizer,
+    dropConsole,
     namedOptimize,
     optimizeLodash,
     optimizeMoment,
-    prerender,
-    vConsole,
-    dropConsole,
-    vendorConfig,
-    rewireReactHotLoader,
+    rewireThemeIce,
+    rewireThemeFusion,
 } = require('./config');
+
+const pkgJSON = require(`${__dirname}/package.json`);
 
 // https://github.com/postcss/postcss
 const postcssPlugins = [
@@ -49,23 +55,28 @@ console.log('当前环境：', process.env.NODE_ENV);
 
 module.exports = override(
     vConsole(VCONSOLE),
-    // dropConsole(DROP_CONSOLE),
+    rewireThemeIce(pkgJSON),
+    rewireThemeFusion(pkgJSON),
     buildFriendly(),
-    addWebpackAlias(webpackAlias),
+    addWebpackAlias(getWebpackAlias(pkgJSON)),
     addPostcssPlugins(postcssPlugins),
     addStylelint(STYLELINT),
+    setWebpackOptimizationSplitChunks(vendorConfig),
     // addWebpackExternals({
     //     react: 'React',
     //     'react-dom': 'ReactDom',
-    // }),    
-    setWebpackOptimizationSplitChunks(vendorConfig),
+    // }),
+    // extractVendors(),
+    useEslintRc(),
     useBabelRc(),
     namedOptimize(),
     optimizeLodash(),
-    // optimizeMoment(),
-    // minimizer(),
+    optimizeMoment(),
+    minimizer({
+        drop_console: DROP_CONSOLE,
+    }),
     // 开启打包速度分析
     // speedMeasure(),
-    BUNDLE_VISUALIZE === 'true' && addBundleVisualizer()
+    BUNDLE_VISUALIZE === 'true' && addBundleVisualizer(),
     // prerender(),
 );

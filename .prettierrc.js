@@ -12,5 +12,5 @@ module.exports = {
     bracketSpacing: true, // 对象，数组加空格
     arrowParens: 'always', // (x) => {} 是否要有小括号
     proseWrap: 'preserve', // 是否要换行
-    requirePragma: false, // 是否要注释来决定是否格式化代码
+    requirePragma: false, // 是否要注释来决定是否格式化代码    
 };

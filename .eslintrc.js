@@ -36,7 +36,6 @@ module.exports = {
     rules: {
         // prettier规则检查：警告
         'prettier/prettier': 'warn',
-
         /** import/export相关 https://github.com/benmosher/eslint-plugin-import/tree/master/docs/rules */
         // 必须写明文件类型：取消
         'import/extensions': 'off',
@@ -55,11 +54,13 @@ module.exports = {
         // 代码块{}的括号样式，起始大括号跟随语句末尾：警告
         'brace-style': ['warn', '1tbs', { allowSingleLine: true }],
         // 驼峰命名方式：警告
-        camelcase: ['warn', { allow: ['^UNSAFE_'] }],
+        camelcase: ['warn', {allow: ["^UNSAFE_"]}],
+        // 拖尾逗号：多行时必须每行有逗号
+        // 'comma-dangle': ['warn', 'always-multiline'],
         // 减少绑定上下文之外的变量的使用
         'block-scoped-var': 'error',
         // 旨在标记不使用的类方法this：取消
-        'class-methods-use-this': 'off',
+        'class-methods-use-this': 'off',        
         // 限制程序的圈复杂度
         complexity: ['warn', 20],
         // 函数必须有返回值：取消
@@ -319,20 +320,20 @@ module.exports = {
         // @off 没必要限制
         'react/jsx-sort-props': 'off',
         // @fixable jsx 的开始和闭合处禁止有空格
-        'react/jsx-tag-spacing': [
-            'warn',
-            {
-                closingSlash: 'never',
-                beforeSelfClosing: 'always',
-                afterOpening: 'never',
-            },
-        ],
+        // 'react/jsx-tag-spacing': [
+        //     'warn',
+        //     {
+        //         closingSlash: 'never',
+        //         beforeSelfClosing: 'always',
+        //         afterOpening: 'never',
+        //     },
+        // ],
         // jsx 文件必须 import React
         // 'react/jsx-uses-react': 'error',
         // 定义了的 jsx element 必须使用
         // 'react/jsx-uses-vars': 'warn',
         // @fixable 多行的 jsx 必须有括号包起来
-        'react/jsx-wrap-multilines': 'warn',
+        // 'react/jsx-wrap-multilines': 'warn',
         // 每行只能有一个jsx组件声明： 取消
         'react/jsx-one-expression-per-line': 'off',
 

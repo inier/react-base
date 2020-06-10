@@ -171,7 +171,7 @@ CRA2 升级的特性，可以参考[英文文档](https://reactjs.org/blog/2018/
 └── yarn.lock                # yarn 依赖包版本lock
 ```
 
-以上结构是项目的推荐结构；文件名后带有\*的，用于组件的层级划分。
+以上结构是项目的推荐结构；文件名后带有\*的，用于组件的层级划分（可选）。
 
 > 以上未提及的文件夹或文件，不用关注。
 > 以上的统一 export 不包括第三方组件。
@@ -671,13 +671,10 @@ http://www.cnblogs.com/cnblogsfans/p/5075073.html
 
 ### 添加自定义的环境变量
 
-你可以在工程设置环境变量，好在 JS、Html、CSS 中使用，比如测试环境和正式环境需要不同的 AppKey 之类的。
-默认的环境变量有 `NODE_ENV` ，它的值有`development` / `production` / `test` 分别对应运行的命令行`yarn start` / `yarn build` / `yarn test`。
+你可以在工程设置环境变量，默认的环境变量有 `NODE_ENV`，它的值有`development` / `production` / `test` 分别对应运行的命令行`yarn start` / `yarn build` / `yarn test`。
 
 > 环境变量的值会在打包阶段被动态的替换掉；
->
 > 要在 React 的环境下生效，自定义的环境变量必须以 `REACT_APP_` 开头；
->
 > 不以 `REACT_APP_`开头的自定义环境变量，只会在后续执行的 nodejs 脚本中生效，而不会置入到 React 的运营环境中。例如 `BUNDLE_VISUALIZE`，只能用于开启脚手架中的`webpack-bundle-analyzer`。
 
 #### 设置环境变量
@@ -692,7 +689,9 @@ http://www.cnblogs.com/cnblogsfans/p/5075073.html
 -   `.env.local：用于本地变量覆盖，这个文件会在除了test环境的所有环境加载`
 -   `.env.development,.env.test,.env.production：在对应的环境加载`
 -   `.env.development.local,.env.test.local,.env.production.local：在对应的环境加载，最高优先级，会覆盖.env.*的配置`
-    加载的优先级从高到低，依次为：
+
+加载的优先级从高到低，依次为：
+
 -   `npm start`: `.env.development.local`, `.env.development`, `.env.local`, `.env`
 -   `npm run build`: `.env.production.local`, `.env.production`, `.env.local`, `.env`
 -   `npm test`: `.env.test.local`, `.env.test`, `.env` (注意没有 `.env.local`)
@@ -747,7 +746,7 @@ http://www.cnblogs.com/cnblogsfans/p/5075073.html
 # API_PORT=9000
 
 # 应用名称
-REACT_APP_NAME=toxic
+REACT_APP_TITLE=toxic
 # 应用版本
 REACT_APP_VERSION=1.0
 ```
@@ -880,7 +879,7 @@ HTTPS=true npm start
 
 -   [prerender-spa-plugin](https://github.com/chrisvfritz/prerender-spa-plugin)
 
-#### utls
+#### utils
 
 ## 国际化
 
