@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { Tag, Button } from '@ozo/toxic-ui';
 import TimeDemo from './TimerDemo';
 import { logo, avatar } from '@/assets';
 import styles from './About.module.scss';
+import '@ozo/toxic-ui/dist/index.css';
 
 class About extends Component {
     constructor(props) {
@@ -31,6 +33,17 @@ class About extends Component {
 
                 <div style={{ marginTop: '10px', padding: '10px' }}>
                     <TimeDemo />
+                </div>
+                <div style={{ marginTop: '10px', padding: '10px' }}>
+                    <Tag text="Default tag" type="default" />
+                    <Tag text="Primary tag" type="primary" />
+                    <Tag text="Info tag" type="info" />
+                    <Tag text="Warning tag" type="warning" />
+                    <Tag text="Danger tag" type="danger" />
+                </div>
+                <div style={{ marginTop: '10px', padding: '10px' }}>
+                    <Button>toxic-ui测试</Button>
+                    <Button type="primary">toxic-ui测试</Button>
                 </div>
             </div>
         );
