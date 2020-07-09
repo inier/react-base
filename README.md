@@ -1,6 +1,6 @@
 [TOC]
 
-# react 模板工程
+# React 模板工程
 
 本模板工程是通用工程，支持前端开发和中后台开发。
 
@@ -16,28 +16,29 @@ CRA2 升级的特性，可以参考[英文文档](https://reactjs.org/blog/2018/
 
 该工程的主要技术特性如下：
 
--   基于 react 16+
--   基于 babel 7
--   基于 webpack 4
--   ES 6/7 标准语法
--   scss / css modules 样式处理
+-   [SCSS](http://sass.bootcss.com/) / CSS Modules 样式处理（不熟悉的同学，先学习下：）
 -   公共 SCSS mixins 支持
--   各类资源统一出口管理
 -   基于 fetch 数据请求
 -   支持 mobx 状态管理\*
 -   支持 Fusion Design 平台，UI 和前端协同\*
 -   支持公共主题可配置
--   Eslint/Stylelint/Prettier 代码规范
+-   Eslint / Stylelint / Prettier 代码检查
 -   Markdownlint 规范 [详情](https://github.com/ruanyf/document-style-guide/) [规则](https://github.com/hustcc/lint-md/tree/master/packages/lint-md)
 -   代码提交日志规范
--   docz+mdx 的演示文档规范
--   支持 webpack 配置自定义
--   支持第三方库自定义打包配置
 -   支持[装饰器 @](https://segmentfault.com/a/1190000018313262) @babel/plugin-proposal-decorators
 -   支持[可选链运算符 ?.](https://segmentfault.com/a/1190000021167608?utm_source=tag-newest) @babel/plugin-proposal-optional-chaining
 -   支持[空位合并运算符 ??](https://segmentfault.com/a/1190000021167608?utm_source=tag-newest) @babel/plugin-proposal-nullish-coalescing-operator
 
 更多特性，赶快体验！
+
+## 依赖环境
+
+-   node 8+
+-    babel 7
+-   webpack 4
+-   React 16+
+-   ES6+
+-   node-sass 4+
 
 ## 项目规范
 
@@ -66,7 +67,7 @@ CRA2 升级的特性，可以参考[英文文档](https://reactjs.org/blog/2018/
 │   ├── api/         		  	 # 项目api相关
 │   	├── Agent.js    	  	 # 接口请求处理逻辑，默认采用fetch
 │   	├── ApiUrl.js   	  	 # 接口请求api地址注册
-│   	├── ResponseCode.js	   # 错误码定义
+│   	├── ResponseCode.js	     # 错误码定义
 │   	└── index.js      		 # 接口的统一export
 │
 │   ├── assets/      		  	 # 公共静态资源（组件除外），如图片/字体/json等，文件名一律小写
@@ -79,70 +80,61 @@ CRA2 升级的特性，可以参考[英文文档](https://reactjs.org/blog/2018/
 │   		├── components/   	 # 组件独有的子组件，目录结构与父级一致
 │   		├── img/      	  	 # 组件的图片目录
 │   		├── xxx.jsx	      	 # 组件的jsx文件
-│   		├── xxx.scss    	   # 组件的scss文件，按需选择
-│   		├── xxx.module.scss  # 组件的scss文件，开启css-modules，按需选择
+│   		├── xxx.scss    	 # 组件的scss文件，按需选择
+│   		├── xxx.module.scss* # 组件的scss文件，开启css-modules，按需选择
 │   		├── xxx.mdx	  	  	 # 组件的说明文档（功能复杂组件可选）
-│   	  └── index.js 	    	 # 组件的export
-│   	├── basis.js*   	  	 # 基础组件的统一export
-│   	├── block.js*   	  	 # 简单组件的统一export
-│   	├── index.js    	  	 # 所有组件的统一export
-│   	├── layout.js*  	  	 # 布局组件的统一export
-│   	├── module.js*  	  	 # 复杂组件的统一export
-│   	└── template.js*		   # 模板组件的统一export
+│   	  	└── index.js 	     # 组件的export
+│   	└── index.js    	  	 # 所有组件的统一export
 │
 │   ├── layouts/     		  	 # 项目布局集合，用于路由分层
 │   	├── xxxLayout/  	  	 # xxx布局组件
 │   		├── components/   	 # 布局独有的子组件，目录结构与通用组件一致
-│   		├── style/     		   # 布局主题scss文件
+│   		├── style/    	     # 布局主题scss文件
 │   		├── xxx.jsx	      	 # 组件的jsx文件
 │   		├── xxx.scss      	 # 组件的scss文件
-│   		├── xxx.module.scss	 # 组件的scss文件,开启css-modules
-│       ├── menuConfig.js 	 # 菜单配置（顶部导航/侧边导航/底部导航等）
+│   		├── xxx.module.scss* # 组件的scss文件,开启css-modules
+│       ├── menuConfig.js 		 # 菜单配置（顶部导航/侧边导航/底部导航等）
 │   	  └── index.js 	    	 # 布局的export
 │   	└── index.js    	  	 # 布局的统一export
 │
-│   ├── modules/    		  	 # 项目独有组件集合（目录结构与layouts一致）
+│   ├── modules/    		  	 # 业务组件集合（目录结构与layouts一致）
 │   	├── xxx/  		  	  	 # 各模块目录
 │   	└── index.js	  	  	 # 容器组件相关的统一export
 │
 │   ├── pages/      		  	 # 页面级组件，用于组合modules/layouts等，目录结构=通用组件
-│   	├── xxx/  			    	 # 各页面目录
+│   	├── xxx/  			  	 # 各页面目录
 │   	└── index.js      		 # 页面的统一export
 │
-│   ├── routes/      		  	 # 路由相关（提供多种路由设计方式，供参考）
-│   	├── flatRoutes/  	  	 # 统一的route配置
-│   	└── layoutRoutes/  	   # route按layout分层配置
-│
 │   ├── stores/      		  	 # 数据store相关，与mobx等库配合
-│   	├── PersistData.js    	 # 数据持久化处理
-│   	├── xxxStore.js  	  	 # 各业务store
+│   	├── Store.js    	 	 # 数据层的基础类
+│   	├── xxxStore.js  	  	 # 各业务store，需要继承Store基类
 │   	└── index.js	  	  	 # store相关的统一export
 │
 │   ├── utils/      		  	 # 辅助工具集合，项目通用方法、函数等
-│   	├── xxx.js  	 	    	 # 各辅助工具
+│   	├── xxx.js  	 	   	 # 各辅助工具
+│   	├── polyfill.js    		 # 浏览器补丁相关
 │   	└── index.js	  	  	 # 辅助工具类的统一export
 │
-│   ├── _settings.scss			 # 项目scss变量定义，用于重置基础变量
-│   ├── App.js      		  	 # 顶级路由
-│   ├── App.css / .scss
+│   ├── settings.scss			 # 项目scss变量定义，用于重置基础变量
+│   ├── App.js      		  	 # 应用入口组件
+│   ├── App.css / .scss*
 │   ├── App.test.js
 │   ├── index.js    		  	 # React入口js
 │   ├── index.css / .scss
-│   ├── polyfill-dynamic.js  # 浏览器补丁相关
-│   ├── polyfill.js    			 # 浏览器补丁相关
-│   ├── router.js		 	    	 # 全局路由处理逻辑
+
+│   ├── router.js		 	   	 # 全局路由处理逻辑
 │   ├── routerConfig.js 		 # 全局路由配置
 │   ├── serviceWorker.js
 │   ├── setupProxy.js 			 # 全局代理配置
 │   └── vendorConfig.js 		 # 用于配置第三方库splitting的范围
 │
-├── style/           			   # style相关
-│   ├── _default.scss  			 # 默认出口，包含全局变量覆盖、全部基础组件，用于编译css
-│   ├── _reset.scss 		     # 全局reset规则，项目不可修改
-│   └── _settings.scss  		 # 基础变量出口，用于组件开发引入，仅包括公用的 mixins 和utils
+├── style/           		     # style相关
+│   ├── default.scss  			 # 默认出口，包含全局变量覆盖、全部基础组件，用于编译css
+│   ├── reset.scss 		   		 # 全局reset规则，项目不可修改
+│   └── settings.scss  			 # 基础变量出口，用于组件开发引入，仅包括公用的 mixins 和utils
 │
 ├── tests/          		  	 # 存放测试用例
-├── .babelrc				         # babel 自定义配置文件
+├── .babelrc.js			         # babel 自定义配置文件
 ├── .commitlintrc.js	    	 # 提交日志规范相关
 ├── .editorconfig       		 # 编辑器配置文件
 ├── .env		       	      	 # 环境变量配置文件，公共变量配置
@@ -150,31 +142,31 @@ CRA2 升级的特性，可以参考[英文文档](https://reactjs.org/blog/2018/
 ├── .env-cmdrc.js      			 # 环境变量配置文件，不同环境的变量配置
 ├── .eslintignore     			 # eslint 忽略配置，类似 .gitignore
 ├── .eslintrc.js       			 # eslint 配置文件
-├── .gitattributes           # 指定由 git 使用的文件和路径的属性
-├── .gitignore               # git 提交忽略配置文件
-├── .lintmdrc                # markdownlint 配置文件
-├── .lintstagedrc.js         # lint-staged 配置文件
-├── .npmignore               # npm 提交忽略配置文件
-├── .nvmrc                   # 配置项目所使用的 node 版本（采用nvm管理node版本）
+├── .gitattributes     		     # 指定由 git 使用的文件和路径的属性
+├── .gitignore          	     # git 提交忽略配置文件
+├── .lintmdrc           	     # markdownlint 配置文件
+├── .lintstagedrc.js    	     # lint-staged 配置文件
+├── .npmignore          	     # npm 提交忽略配置文件
+├── .nvmrc             		     # 配置项目所使用的 node 版本（采用nvm管理node版本）
 ├── .prettierignore     		 # prettier 忽略配置，类似 .gitignore
 ├── .prettierrc.js   	  		 # prettier 配置文件
 ├── .stylelintignore	  		 # stylelint 忽略配置，类似 .gitignore
 ├── .stylelintrc.js			     # stylelint 配置文件
-├── .yarnrc                  # yarn 配置文件
+├── .yarnrc              	     # yarn 配置文件
 ├── config-overrides.js			 # 在不eject的情况下，扩展webpack配置
-├── jsconfig.json            # 指定根文件和js语言服务提供的功能选项
+├── jsconfig.json        	     # 指定根文件和js语言服务提供的功能选项
 ├── package.json		      	 # 包含项目的基本信息、项目的依赖以及项目的相关执行命令等
-├── package-lock.json        # npm 依赖包版本lock
-├── README.md					       # 描述此项目的功能、特点、API 等信息
+├── package-lock.json     	     # npm 依赖包版本lock
+├── README.md				     # 描述此项目的功能、特点、API 等信息
 ├── server.js       	  		 # 本地构建服务器
 ├── server.test.js  	  		 # 本地开发测试服务器
-└── yarn.lock                # yarn 依赖包版本lock
+└── yarn.lock            	     # yarn 依赖包版本lock
 ```
 
-以上结构是项目的推荐结构；文件名后带有\*的，用于组件的层级划分（可选）。
-
+> 以上结构是项目的推荐结构；带有 * 的文件为可选。
+>
 > 以上未提及的文件夹或文件，不用关注。
-> 以上的统一 export 不包括第三方组件。
+> 以上各目录中的统一 export 不包括第三方组件，且未使用的组件应避免在此导出。
 
 ### 命名规范
 
@@ -186,149 +178,44 @@ CRA2 升级的特性，可以参考[英文文档](https://reactjs.org/blog/2018/
 
 #### 通用组件（复用级别：框架级）
 
-通用组件是与具体业务解耦，可以在大多数项目中公用的组件。一般只负责接收指定格式的数据进行 UI 展示，不负责数据处理。也就是常说的**展示型**组件。
+通用组件也叫**展示型**组件，与具体业务解耦，只负责接收指定格式的数据进行 UI 展示。可在大多数项目中通用。约定存放在**`src/components`**目录中。
 
-目前通用组件库正处于积累阶段，存放在**`src/components`**目录中。为了便于组件库的开发和维护及引用，划分了 basis、block、module、template 等四个级别，具体的级别划分规则如下：
+为便于沉淀通用组件库，并提高其可维护性。约定将通用组件划分以下 4 类：
 
--   **basis：单体组件**，网页构成的基本元素。例如图标、按钮、字体、色调等。
--   **block：简单组件**，由**一个以上的 basis 组件**组成的简单 UI 组件。例如，一个表单标签，集成搜索框和按钮的搜索表单等。
--   **module：复杂组件**，具备独立的功能，由**一个以上的 basis 或 block 组件**组成。例如整站头部（包括导航菜单、搜索框等）、支持筛选和分页的表格、对话框等。
--   **template：模板组件**，可重用的复杂 UI 结构，一般为页面级组件。由一个以上 module 及多个 basis/block 组件组成，例如支付成功页等。
-
-以上各级组件，通过**layout**布局组件（用于对页面布局相关组件归类，如网格系统、两侧留白、水平留白等）进行组织。
++ **basis**：基础型组件，构成网页的基本元素。例如图标、按钮等；
++ **layout**：布局型组件，用于组织页面布局，例如网格系统、两侧留白、水平留白等；
++ **block**：区块/模块型组件，具有独立的功能，低于页面级的组件，例如支持筛选和分页的表格，可以嵌套；
++ **template**：模板型组件，可重用的复杂 UI 结构，一般为页面级组件，例如支付成功页等。
 
 #### 业务组件（复用级别：项目级）
 
-业务组件是指与产品页面紧密相关的的组件，一般都捆绑有具体的数据或状态。也就是**容器型**组件。
+业务组件是指与项目紧密相关的组件，一般会捆绑具体的数据或状态，也叫**容器型**组件。分为以下 3 类：
 
-按照使用级别，分为 modules（`src/modules`）、 pages （`src/pages`）两个级别：
+- **modules（`src/modules`）**：功能组件，用于归类项目开发中，无法沉淀为框架级的、但项目内可复用的功能块，一般由**数据或状态** + **通用组件**组成。例如购物车模块、用户登录等。
 
--   **modules（`src/modules`）**：项目功能组件，用于归类项目开发中，无法沉淀为框架级的、但项目内可复用的功能块，一般由**数据或状态** + **通用组件**组成。例如购物车模块、用户登录等。
--   **pages （`src/pages`）**：项目页面组件，用于归类按页面流划分的页面组件，一般由**项目级 modules** + **通用组件（布局类等）**组成。
+- **pages （`src/pages`）**：页面组件，用于归类按页面流划分的页面组件，一般由**项目级 modules** + **通用组件（布局类组件等）**组成。
 
-> 注意区分`src/layouts与src/components/layout.js`、`src/modules与src/components/modules.js`的概念，其各自的通用性是不同的。
+- **layouts（`src/layouts`）**：结构组件，主要用于对整个项目的页面结构做归类，抽出公共的页面级容器组件。例如可定义：
 
-此外，还有 layouts（`src/layouts`）这类组件，其作用主要用于对整个项目的页面结构做归类，抽出公共的页面级容器组件。例如：
+  ```
+  - MainLayout：用于一级页面，带有一级导航、标题栏、底部导航等。
+  - BaseLayout：用于二级页面，如商品列表、商品详情等。
+  - BlankLayout：什么都不带，100%高的容器，用于404 等特殊页面布局等。
+  
+  当然，也可以根据业务需求划分，如 GoodDetailLayout 商品详情模块、UserLayout 登录/注册/忘记密码等。其原则是可重用，便于组织页面。
+  ```
 
--   MainLayout：带 header 和 footer，用于一级页面，带有标题栏和底部导航，例如微信。
--   BaseLayout：只带 header，用于二级页面，如商品列表、商品详情等。
--   BlankLayout：什么都不带，100%高的容器，用于我、404 等特殊页面布局等。
+### 开发须知
 
-当然，也可以根据业务需求划分，如 GoodDetailLayout 商品详情模块、UserLayout 登录/注册/忘记密码等。其原则是可重用，便于组织页面。
-
-#### 开发须知
-
-开发中，必须做到：
-
--   所有通用组件均提供完整的 propTypes 注释，不仅方便维护和理解。也能便于 Docz 等文档生成工具提取。具体写法参照[组件演示文档](doc/组件演示文档编写.md)。
--   所有通用组件均提供 mdx 说明文档，并提供需要编写对应的演示案例，具体写法参照[组件演示文档](doc/组件演示文档编写.md)。
--   所有的组件（通用组件和业务组件）都需要按指定规则分类，并通过对应的 js 进行 export。
--   引入的第三方组件也应该进行归类。
--   组件归类时，必需在入口处提供组件的功能简述。
--   采用`import { Modal, Footer, InputSingle } from '../../components';`方式引入，不直接引入某个单独的组件。
-
-尽量做到：
+-   推荐通过各类目录下的index.js统一export。便于对该目录下的资源或组件进行统一注册、替换和添加描述备注等，提高可维护性。
+-   通过@、@/components、@components等别名来引入组件。
 
 -   开发前先根据页面梳理组件，并对组件分级；做好 store 划分，提取公共数据处理逻辑。
--   页面均由**布局组件**+ **通用组件/项目级功能组件**组成，不含原子标签（div、span 等）。
+-   尽量做到页面均由**布局组件**+ **通用组件/项目级功能组件**组成，不含原子标签（div、span 等）。
 
-## 设计与开发协同
 
-设计与开发协同，是指通过一个规范体系约束 UI 和前端，这个规范即可指导产品和 UI 进行设计，也可以指导前端的代码开发。其作用是：统一设计和开发标准，有效减少两者在开发中的回环，沉淀软件资产。
-
-根据项目体量及团队配比，主流的协作方式有以下三种：
-
-#### 文档型协同
-
-文档型协同是指主要通过 UI 规范文档、标注文档等来指导设计与开发。这在大多数中小公司中非常普遍。这种约定比较初级。
-
--   **优点**：对团队人员的能力要求一般；
--   **缺点**：沟通成本和团队磨合成本很高。
-
-#### 框架型协同
-
-相较于文档型协同而言，框架型协同先进一些。其主要是通过代码在开发端对 UI 规范进行抽象，已达到两者协同。如采用一套标准的 UI 库；自建 UI 库的团队会采用 LESS、SCSS 等预处理语言来维护 UI 的 Design Tokens，开发围绕这些 Token 展开，便于统一改进和扩展。
-
--   **优点**：简单沟通和磨合，即可形成战斗力；开发自由度高，可控性高；
--   **缺点**：专业性很强，对团队人员的设计和开发抽象能力要求较高。
-
-目前主流的 UI 库基本上都采用 SCSS 来处理这一步工作，出于综合考虑，本项目也提供了这种选择。
-
-##### SCSS 通用处理
-
--   **重置通用样式：**通过`src/_settings.scss`覆盖`style/_settings.scss`中指定的变量进行重置。
-
-##### 定义 SCSS 变量
-
-第一步：在`src/_settings.scss`中定义公共的 scss 变量，特别注意命名规范；
-
-第二部：在组件的 scss 文件头部引入`src/_settings.scss`
-
-```scss
-@import '~@style/_settings'; //引入路径根据组件scss文件位置进行修正
-.content {
-    color: $modal-color;
-}
-```
-
-##### 使用 SCSS mixins
-
-脚手架默认引入了一些常用的 mixins，使用方法参考：https://github.com/inier/mixins。
-
-```scss
-@import '~@style/_settings'; //引入路径根据组件scss文件位置进行修正
-
-/*-------- 极细边框 --------*/
-// 上、右、下、左边框
-.border-t {
-    @include onepx-scale(#eee, top, after, 2px);
-}
-
-.border-r {
-    @include onepx-scale(#eee, right, after, 2px);
-}
-```
-
-此外，也可以在`style/_settings.scss`文件中自定义 mixins。
-
-##### 编写 CSS 样式
-
-根据需要开发通用的组件样式，作为通用样式库，不建议采用 CSS-Module 方式，以便于适应不同的框架和需求。
-
-#### 平台型协同
-
-平台型协同较大程度地规避了前两种方式的缺点，即不需要过于专业的 CSS 抽象能力，也能保持较低的沟通和磨合成本。
-
--   **优点**：沟通简单，专人专事，可操作性强，可维护性高；
--   **缺点**：依赖专业平台，自由度稍稍不如框架型协同方式。
-
-目前可用的平台主要是`阿里巴巴的Fusion Design`，其本质是在框架型协同的基础上，将映射全局样式的过程进行了可视化实现。大大简化了 UI 库全局样式的维护难度和成本。这里简单介绍下操作流程：
-
-1. **平台注册**：在[平台](https://fusion.design)注册并开通站点，然后将开发人员和协同人员加入该项目；
-2. **设计相关**：设计人员负责维护 Design Tokens，维护方式全程可视化，非常简便；
-3. **组件维护**：开发人员维护组件，通过组件市场（物料中心）筛选或自建组件等方式维护自己的组件库；
-4. **代码托管**：该组件库最后的代码会托管到 npm 平台；
-5. **开发流程**： 安装对应的组件库和主题包，并根据[开发文档](https://fusion.design/69602/component/button)进行开发即可；
-6. **更新流程**： 设计人员修改对应的 Tokens，开发人员更新新的 npm 包即可。
-
-> 这三种协同的演进，伴随着前端工作的体系改进。也代表着前端工作的演变。从 菜鸟 到 合格 到 超越，go on。
-
-##### 引入组件
-
-详情参见[Fusion Design 的文档说明](https://fusion.design/component/button)。
-
-```plain
-import { Button } from '@alifd/next';
-```
 
 ## 开发调试
-
-### 依赖环境
-
--   node 8+
--   SCSS （不熟悉的同学，先学习下：http://sass.bootcss.com/）
--   React 16+
--   ES6+
 
 ### 安装依赖
 
@@ -338,29 +225,17 @@ import { Button } from '@alifd/next';
 > yarn
 ```
 
-### 开发相关
+### 命令行
 
-启动：`yarn start`或`npm start`，App 会以开发模式运行，会自动在浏览器打开 [http://localhost:3000](http://localhost:3000)，支持
++ yarn start/npm start  启动开发环境，会自动在浏览器打开 [http://localhost:3000](http://localhost:3000)，支持热更新。
++ yarn build 生产环境打包
++ yarn test 进行测试
++ yarn commit 命令行提交，类型选择
++ yarn version changlog 及版本管理
 
-热更新。
+> 推荐编辑器 [Visual Studio Code](https://code.visualstudio.com/)，如果出现 vscode 占用系统资源 100%的情况，请检查是否安装了 SCSS InterliSense 、IntelliSense for CSS class names in HTML 插件，若存在，请关闭这类插件。****
 
-编辑：推荐编辑器 [Visual Studio Code](https://code.visualstudio.com/)
-
-> 如果出现 vscode 占用系统资源 100%的情况，请检查是否安装了 SCSS InterliSense 、IntelliSense for CSS class names in HTML 插件，若存在，请关闭这类插件。
-
-其他命令：
-
-1. yarn build 生产环境打包
-
-2. yarn test 进行测试
-
-3. yarn commit 命令行提交，类型选择
-
-4. yarn version changlog 及版本管理
-
-5. yarn docz dev/build 组件演示文档的 dev 和 build
-
-#### 使用全局别名
+### 使用全局别名
 
 已定义以下全局别名：
 
@@ -374,13 +249,52 @@ import { Button } from '@alifd/next';
 > 使用别名，scss 名称@import 时需要写完整，文件名中的\_ 和 .scss 后缀名不能少。
 > 使用第三方库的 css 时，可以通过`~`引入或写全`node_modules`的路径。
 
-#### 修改入口页标题
+### 修改入口页标题
 
-如果要修改网页标题，请在到 public 下的 html 中的<title>标签修改。
+如果要修改网页标题，请修改package.json的title字段；或者修改 public/index.html中的<title>标签内容。
 还可替换 favicon.ico 为自己的 ico。
 manifest.json 中的信息也一并修改。
 
-#### CSS 样式编写
+### 设计与开发协同
+
+详情参见[UI设计与前端协同](https://zhuanlan.zhihu.com/p/158206021)。
+
+### CSS 样式编写
+
+##### 定义 SCSS 变量
+
+项目开发中，对于在主题包之外的公共特性，如颜色、字号等，可以统一定义到`src/settings.scss`文件中，以便于后期维护和管理。注意命名规范和分组。
+
+```scss
+// ./src/settings.scss
+$modal-color: #f33;
+
+// 组件的xxx.scss
+@import '@settings'; //引入路径根据组件scss文件位置进行修正
+.content {
+    color: $modal-color;
+}
+```
+
+##### 使用 SCSS mixins
+
+脚手架默认引入了一些常用的 mixins，使用方法参考：https://github.com/inier/mixins。
+
+```scss
+@import '~@style/settings'; //引入路径根据组件scss文件位置进行修正
+
+/*-------- 极细边框 --------*/
+// 上、右、下、左边框
+.border-t {
+    @include onepx-scale(#eee, top, after, 2px);
+}
+
+.border-r {
+    @include onepx-scale(#eee, right, after, 2px);
+}
+```
+
+此外，也可以在`style/settings.scss`文件中自定义 mixins。
 
 ##### 不开启 CSS-Module
 
@@ -438,9 +352,13 @@ import styles from './xxx.module.scss';
 
 样式继承：开启 CSS-Module 功能后，样式继承请使用[如下方法](https://github.com/css-modules/css-modules#dependencies)。
 
-#### 使用字体图标
 
-当需要使用字体图标的时候，可以参照以下方法。
+
+使用字体图标
+
+##### 平台型协同方式的字体图标
+
+采用平台型协同方式时，可在 fusion 平台统一管理字体图标（同样依赖 iconfont.cn 库）。不用像上面一样单独引入 iconfont.css。
 
 ##### 引入在线字体图标
 
@@ -470,37 +388,11 @@ import styles from './xxx.module.scss';
 
 ##### 引入本地字体图标文件
 
-对于本地化的字体文件，可将该资源放入到`src/assets`目录中，然后在`src/index.scss`中引入其样式文件即可。
+对于本地化字体文件，可将该资源放入到`src/assets`目录中，然后在`src/index.scss`中引入其样式文件即可。
 
 > 这种情况下，本地字体图标文件，一般会被完整打包到 js 中，也可通过打包手段分离出来。
 
-##### 敏捷型协同方式的字体图标
-
-采用敏捷型协同方式时，可以在 fusion 平台统一管理字体图标（同样依赖 iconfont.cn 库）。不用像上面一样单独引入 iconfont.css。
-
-##### 定义字体图标组件
-
-推荐采用 Icon 组件统一处理字体图标，返回类似以下结构：
-
-```js
-<i className={`iconfont icon-${icon} ${className || ""}`} style={style || {color: fontSize: size }} />
-或
-<i className={`iconfont ${icon} ${className || ""}`} style={style || {color: fontSize: size }} />
-```
-
-组件属性包括： icon、size 等
-
-##### 使用字体图标
-
-Icon 在代码中的用法：
-
-```js
-<Icon icon="arrow-left" size="12px" />
-或
-<Icon icon="icon-arrow-left" size="12px" />
-```
-
-#### 引入图片等资源
+### 引入图片等资源
 
 为了减小 Http 的请求数目，在打包时 webpack 会将小于 10k 的图片直接转换成 base64 字符串放在 html 中。
 **目前只支持 bmp,gif,jpg,jpeg,png**
@@ -527,7 +419,7 @@ export default Header;
 }
 ```
 
-#### 异步加载组件
+### 异步加载组件
 
 因为默认情况下，webpack 会将引用到的包都打包到同一个 JS 文件中，所以可能入口 js 文件可能会很大。
 为了使用之变小，在使用 react-router 打开组件时，请使用如下方法引入
@@ -538,14 +430,14 @@ const Login =()=><Async load={import('./Login')}/>
 <Route  path='/Login' component={Login}/>
 ```
 
-#### 调用接口
+### 调用接口
 
 在本地开发时，将相对路径配`./src/apiApiUrl.js`中即可。
 例如：`LOGIN: '/login'`
 
 > 由于现在都是前后的分离的，前端调用的接口都是跨域的，所以需要进行代理。
 
-#### 配置代理
+### 配置代理
 
 在`src/setupProxy.js`中参照一下配置：
 
@@ -569,7 +461,7 @@ module.exports = function (app) {
 
 具体用法请参考`http-proxy-middleware`组件的官方使用方法https://github.com/chimurai/http-proxy-middleware。
 
-#### mobx 开发相关
+### mobx 开发相关
 
 采用主流的 mobx4， 支持 es5。
 
@@ -662,6 +554,62 @@ http://www.cnblogs.com/cnblogsfans/p/5075073.html
 
 ## 进阶配置
 
+### 国际化
+
+项目的国际化，根据场景主要分为组件国际化、日期国际化、内容国际化。
+
+- **组件国际化**
+
+  很多 UI 框架或组件自身已提供国际化方案，可以参考使用，如[Fusion Design UI](https://fusion.design/component/doc/107)。
+
+* **日期国际化**
+
+  对于日期来说，可以借助 [moment](https://github.com/moment/moment) 库，其自带国际化相关能力。目前社区比较主流的解决方案有以下两种：
+
+  方法一：
+
+  ```js
+  const webpack = require('webpack');
+  
+  module.exports = {
+      // ...
+      plugins: [
+          // 打包指定需要的语言文件
+          new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /zh-cn|ja/),
+      ],
+  };
+  ```
+
+  方法二：
+
+  ```js
+  const webpack = require('webpack');
+  
+  module.exports = {
+      // ...
+      plugins: [
+          // 只打包有过引用的语言文件，应用中需要添加如：`import 'moment/locale/zh-cn';`
+          // new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+      ],
+  };
+  ```
+
+- **内容国际化**
+
+  主流的内容国际化方案有：
+
+  [kiwi](https://github.com/nefe/kiwi) [有配套的 vscode 工具，持续关注]
+
+  [react-intl](https://github.com/yahoo/react-intl) [yahoo]
+
+  [react-intl-universal](https://github.com/alibaba/react-intl-universal) [alibaba]
+
+  [react-i18next](https://react.i18next.com/) [i18next.js]
+
+  [i18n-pick](https://github.com/ProtoTeam/i18n-pick) [蚂蚁金服团队]
+
+  [react-i18n](https://juejin.im/post/5c24a09d5188252a9412fabf) [腾讯 webnovel 团队，暂未开源]
+
 ### 自定义 webpack 配置
 
 本脚手架采用了 react-script，自定义 webpack 的配置有两种方式：
@@ -680,28 +628,6 @@ http://www.cnblogs.com/cnblogsfans/p/5075073.html
 #### 设置环境变量
 
 环境变量有以下几种设置方式：
-
-##### 文件内定义
-
-可以在项目根目录下新建如下的文件（不同命令，会读取不同的文件）
-
--   `.env： 默认使用`
--   `.env.local：用于本地变量覆盖，这个文件会在除了test环境的所有环境加载`
--   `.env.development,.env.test,.env.production：在对应的环境加载`
--   `.env.development.local,.env.test.local,.env.production.local：在对应的环境加载，最高优先级，会覆盖.env.*的配置`
-
-加载的优先级从高到低，依次为：
-
--   `npm start`: `.env.development.local`, `.env.development`, `.env.local`, `.env`
--   `npm run build`: `.env.production.local`, `.env.production`, `.env.local`, `.env`
--   `npm test`: `.env.test.local`, `.env.test`, `.env` (注意没有 `.env.local`)
-
-##### 命令行直接设置
-
-环境变量还可以在运行命令行的时候直接设置
-
--   Windows(cmd.ext): `set REACT_APP_SECRET_CODE=123&&npm start`
--   Mac: `REACT_APP_SECRET_CODE=123 npm start`
 
 ##### env-cmd 的 rc 文件集中管理【推荐】
 
@@ -751,6 +677,30 @@ REACT_APP_TITLE=toxic
 REACT_APP_VERSION=1.0
 ```
 
+##### 文件内定义
+
+可以在项目根目录下新建如下的文件（不同命令，会读取不同的文件）
+
+-   `.env： 默认使用`
+-   `.env.local：用于本地变量覆盖，这个文件会在除了test环境的所有环境加载`
+-   `.env.development,.env.test,.env.production：在对应的环境加载`
+-   `.env.development.local,.env.test.local,.env.production.local：在对应的环境加载，最高优先级，会覆盖.env.*的配置`
+
+加载的优先级从高到低，依次为：
+
+-   `npm start`: `.env.development.local`, `.env.development`, `.env.local`, `.env`
+-   `npm run build`: `.env.production.local`, `.env.production`, `.env.local`, `.env`
+-   `npm test`: `.env.test.local`, `.env.test`, `.env` (注意没有 `.env.local`)
+
+##### 命令行直接设置
+
+环境变量还可以在运行命令行的时候直接设置
+
+-   Windows(cmd.ext): `set REACT_APP_SECRET_CODE=123&&npm start`
+-   Mac: `REACT_APP_SECRET_CODE=123 npm start`
+
+
+
 #### 使用环境变量
 
 jsx 中使用：
@@ -784,13 +734,13 @@ html 中使用：
 
 ### 启用 PWA 特性
 
-CRA2 支持 workbox，可以一键开启 PWA（Progressive Web App）。在`src/index.js` 文件中有以下代码：
+CRA 支持 workbox，可以一键开启 PWA（Progressive Web App）。在`src/index.js` 文件中有以下代码：
 
 ```js
 serviceWorker.unregister();
 ```
 
-如果要使用 CRA2 提供的 PWA 特性的话，我们需要将`serviceWorker.unregister()` 改为`serviceWorker.register()`。打包项目后，在`build`文件夹下有以下几个文件：
+如果要使用 CRA 提供的 PWA 特性的话，我们需要将`serviceWorker.unregister()` 改为`serviceWorker.register()`。打包项目后，在`build`文件夹下有以下几个文件：
 
 -   asset-manifest.json // 存放本次打包后资源的路径及 hash，用于区分版本
 -   server-worker.js // 规定了资源缓存策略
@@ -871,71 +821,7 @@ HTTPS=true npm start
 
 ### 推荐库
 
-#### components
-
--   [react-hold](https://github.com/toplan/react-hold) [在线示例](http://toplan.github.io/react-hold/)
-
--   [react-placeholder](https://github.com/buildo/react-placeholder) [在线示例](http://buildo.github.io/react-placeholder/#!/ReactPlaceholder)
-
--   [prerender-spa-plugin](https://github.com/chrisvfritz/prerender-spa-plugin)
-
-#### utils
-
-## 国际化
-
-项目的国际化，根据场景主要分为组件国际化、日期国际化、内容国际化。
-
--   **组件国际化**
-
-    很多 UI 框架或组件自身已提供国际化方案，可以参考使用，如[Fusion Design UI](https://fusion.design/component/doc/107)。
-
-*   **日期国际化**
-
-    对于日期来说，可以借助 [moment](https://github.com/moment/moment) 库，其自带国际化相关能力。目前社区比较主流的解决方案有以下两种：
-
-    方法一：
-
-    ```js
-    const webpack = require('webpack');
-
-    module.exports = {
-        // ...
-        plugins: [
-            // 打包指定需要的语言文件
-            new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /zh-cn|ja/),
-        ],
-    };
-    ```
-
-    方法二：
-
-    ```js
-    const webpack = require('webpack');
-
-    module.exports = {
-        // ...
-        plugins: [
-            // 只打包有过引用的语言文件，应用中需要添加如：`import 'moment/locale/zh-cn';`
-            // new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
-        ],
-    };
-    ```
-
--   **内容国际化**
-
-    主流的内容国际化方案有：
-
-    [kiwi](https://github.com/nefe/kiwi) [有配套的 vscode 工具，持续关注]
-
-    [react-intl](https://github.com/yahoo/react-intl) [yahoo]
-
-    [react-intl-universal](https://github.com/alibaba/react-intl-universal) [alibaba]
-
-    [react-i18next](https://react.i18next.com/) [i18next.js]
-
-    [i18n-pick](https://github.com/ProtoTeam/i18n-pick) [蚂蚁金服团队]
-
-    [react-i18n](https://juejin.im/post/5c24a09d5188252a9412fabf) [腾讯 webnovel 团队，暂未开源]
+详情请见[推荐库](doc/推荐库.md)
 
 ## 附录
 
