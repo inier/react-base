@@ -34,7 +34,7 @@ CRA2 升级的特性，可以参考[英文文档](https://reactjs.org/blog/2018/
 ## 依赖环境
 
 -   node 8+
--    babel 7
+-   babel 7
 -   webpack 4
 -   React 16+
 -   ES6+
@@ -48,9 +48,6 @@ CRA2 升级的特性，可以参考[英文文档](https://reactjs.org/blog/2018/
 ├── .vscode/          			 # vscode相关
 │   └── launch.json  		  	 # 存放调试配置，如Debugger for Chrome调试配置等
 ├── build/          		  	 # 构建目录，构建后创建
-├── config/      		       	 # 脚手架自定义配置目录等
-│   ├── xxx.js  	 	       	 # 各自定义配置项
-│   └── index.js	  	     	 # 自定义配置项的统一export
 │
 ├── doc/            		  	 # 文档目录，存放项目相关文档
 ├── node_modules/   		  	 # node依赖模块，安装组件后自动创建
@@ -86,6 +83,9 @@ CRA2 升级的特性，可以参考[英文文档](https://reactjs.org/blog/2018/
 │   	  	└── index.js 	     # 组件的export
 │   	└── index.js    	  	 # 所有组件的统一export
 │
+│   ├── layouts/     		  	 # 常量目录（可选）
+      └── index.js	  	  	 # 常量的统一export
+
 │   ├── layouts/     		  	 # 项目布局集合，用于路由分层
 │   	├── xxxLayout/  	  	 # xxx布局组件
 │   		├── components/   	 # 布局独有的子组件，目录结构与通用组件一致
@@ -121,17 +121,11 @@ CRA2 升级的特性，可以参考[英文文档](https://reactjs.org/blog/2018/
 │   ├── App.test.js
 │   ├── index.js    		  	 # React入口js
 │   ├── index.css / .scss
-
 │   ├── router.js		 	   	 # 全局路由处理逻辑
 │   ├── routerConfig.js 		 # 全局路由配置
 │   ├── serviceWorker.js
 │   ├── setupProxy.js 			 # 全局代理配置
 │   └── vendorConfig.js 		 # 用于配置第三方库splitting的范围
-│
-├── style/           		     # style相关
-│   ├── default.scss  			 # 默认出口，包含全局变量覆盖、全部基础组件，用于编译css
-│   ├── reset.scss 		   		 # 全局reset规则，项目不可修改
-│   └── settings.scss  			 # 基础变量出口，用于组件开发引入，仅包括公用的 mixins 和utils
 │
 ├── tests/          		  	 # 存放测试用例
 ├── .babelrc.js			         # babel 自定义配置文件
@@ -163,7 +157,7 @@ CRA2 升级的特性，可以参考[英文文档](https://reactjs.org/blog/2018/
 └── yarn.lock            	     # yarn 依赖包版本lock
 ```
 
-> 以上结构是项目的推荐结构；带有 * 的文件为可选。
+> 以上结构是项目的推荐结构；带有 \* 的文件为可选。
 >
 > 以上未提及的文件夹或文件，不用关注。
 > 以上各目录中的统一 export 不包括第三方组件，且未使用的组件应避免在此导出。
@@ -182,38 +176,36 @@ CRA2 升级的特性，可以参考[英文文档](https://reactjs.org/blog/2018/
 
 为便于沉淀通用组件库，并提高其可维护性。约定将通用组件划分以下 4 类：
 
-+ **basis**：基础型组件，构成网页的基本元素。例如图标、按钮等；
-+ **layout**：布局型组件，用于组织页面布局，例如网格系统、两侧留白、水平留白等；
-+ **block**：区块/模块型组件，具有独立的功能，低于页面级的组件，例如支持筛选和分页的表格，可以嵌套；
-+ **template**：模板型组件，可重用的复杂 UI 结构，一般为页面级组件，例如支付成功页等。
+-   **basis**：基础型组件，构成网页的基本元素。例如图标、按钮等；
+-   **layout**：布局型组件，用于组织页面布局，例如网格系统、两侧留白、水平留白等；
+-   **block**：区块/模块型组件，具有独立的功能，低于页面级的组件，例如支持筛选和分页的表格，可以嵌套；
+-   **template**：模板型组件，可重用的复杂 UI 结构，一般为页面级组件，例如支付成功页等。
 
 #### 业务组件（复用级别：项目级）
 
 业务组件是指与项目紧密相关的组件，一般会捆绑具体的数据或状态，也叫**容器型**组件。分为以下 3 类：
 
-- **modules（`src/modules`）**：功能组件，用于归类项目开发中，无法沉淀为框架级的、但项目内可复用的功能块，一般由**数据或状态** + **通用组件**组成。例如购物车模块、用户登录等。
+-   **modules（`src/modules`）**：功能组件，用于归类项目开发中，无法沉淀为框架级的、但项目内可复用的功能块，一般由**数据或状态** + **通用组件**组成。例如购物车模块、用户登录等。
 
-- **pages （`src/pages`）**：页面组件，用于归类按页面流划分的页面组件，一般由**项目级 modules** + **通用组件（布局类组件等）**组成。
+-   **pages （`src/pages`）**：页面组件，用于归类按页面流划分的页面组件，一般由**项目级 modules** + **通用组件（布局类组件等）**组成。
 
-- **layouts（`src/layouts`）**：结构组件，主要用于对整个项目的页面结构做归类，抽出公共的页面级容器组件。例如可定义：
+-   **layouts（`src/layouts`）**：结构组件，主要用于对整个项目的页面结构做归类，抽出公共的页面级容器组件。例如可定义：
 
-  ```
-  - MainLayout：用于一级页面，带有一级导航、标题栏、底部导航等。
-  - BaseLayout：用于二级页面，如商品列表、商品详情等。
-  - BlankLayout：什么都不带，100%高的容器，用于404 等特殊页面布局等。
-  
-  当然，也可以根据业务需求划分，如 GoodDetailLayout 商品详情模块、UserLayout 登录/注册/忘记密码等。其原则是可重用，便于组织页面。
-  ```
+    ```
+    - MainLayout：用于一级页面，带有一级导航、标题栏、底部导航等。
+    - BaseLayout：用于二级页面，如商品列表、商品详情等。
+    - BlankLayout：什么都不带，100%高的容器，用于404 等特殊页面布局等。
+
+    当然，也可以根据业务需求划分，如 GoodDetailLayout 商品详情模块、UserLayout 登录/注册/忘记密码等。其原则是可重用，便于组织页面。
+    ```
 
 ### 开发须知
 
--   推荐通过各类目录下的index.js统一export。便于对该目录下的资源或组件进行统一注册、替换和添加描述备注等，提高可维护性。
--   通过@、@/components、@components等别名来引入组件。
+-   推荐通过各类目录下的 index.js 统一 export。便于对该目录下的资源或组件进行统一注册、替换和添加描述备注等，提高可维护性。
+-   通过@、@/components、@components 等别名来引入组件。
 
 -   开发前先根据页面梳理组件，并对组件分级；做好 store 划分，提取公共数据处理逻辑。
 -   尽量做到页面均由**布局组件**+ **通用组件/项目级功能组件**组成，不含原子标签（div、span 等）。
-
-
 
 ## 开发调试
 
@@ -227,13 +219,13 @@ CRA2 升级的特性，可以参考[英文文档](https://reactjs.org/blog/2018/
 
 ### 命令行
 
-+ yarn start/npm start  启动开发环境，会自动在浏览器打开 [http://localhost:3000](http://localhost:3000)，支持热更新。
-+ yarn build 生产环境打包
-+ yarn test 进行测试
-+ yarn commit 命令行提交，类型选择
-+ yarn version changlog 及版本管理
+-   yarn start/npm start 启动开发环境，会自动在浏览器打开 [http://localhost:3000](http://localhost:3000)，支持热更新。
+-   yarn build 生产环境打包
+-   yarn test 进行测试
+-   yarn commit 命令行提交，类型选择
+-   yarn version changlog 及版本管理
 
-> 推荐编辑器 [Visual Studio Code](https://code.visualstudio.com/)，如果出现 vscode 占用系统资源 100%的情况，请检查是否安装了 SCSS InterliSense 、IntelliSense for CSS class names in HTML 插件，若存在，请关闭这类插件。****
+> 推荐编辑器 [Visual Studio Code](https://code.visualstudio.com/)，如果出现 vscode 占用系统资源 100%的情况，请检查是否安装了 SCSS InterliSense 、IntelliSense for CSS class names in HTML 插件，若存在，请关闭这类插件。\*\*\*\*
 
 ### 使用全局别名
 
@@ -251,13 +243,13 @@ CRA2 升级的特性，可以参考[英文文档](https://reactjs.org/blog/2018/
 
 ### 修改入口页标题
 
-如果要修改网页标题，请修改package.json的title字段；或者修改 public/index.html中的<title>标签内容。
+如果要修改网页标题，请修改 package.json 的 title 字段；或者修改 public/index.html 中的<title>标签内容。
 还可替换 favicon.ico 为自己的 ico。
 manifest.json 中的信息也一并修改。
 
 ### 设计与开发协同
 
-详情参见[UI设计与前端协同](https://zhuanlan.zhihu.com/p/158206021)。
+详情参见[UI 设计与前端协同](https://zhuanlan.zhihu.com/p/158206021)。
 
 ### CSS 样式编写
 
@@ -351,8 +343,6 @@ import styles from './xxx.module.scss';
 > 如果要使用全局样式，请在样式文件中使用 :global，并在引用时，使用字符串而不是变量应用。
 
 样式继承：开启 CSS-Module 功能后，样式继承请使用[如下方法](https://github.com/css-modules/css-modules#dependencies)。
-
-
 
 使用字体图标
 
@@ -558,57 +548,57 @@ http://www.cnblogs.com/cnblogsfans/p/5075073.html
 
 项目的国际化，根据场景主要分为组件国际化、日期国际化、内容国际化。
 
-- **组件国际化**
+-   **组件国际化**
 
-  很多 UI 框架或组件自身已提供国际化方案，可以参考使用，如[Fusion Design UI](https://fusion.design/component/doc/107)。
+    很多 UI 框架或组件自身已提供国际化方案，可以参考使用，如[Fusion Design UI](https://fusion.design/component/doc/107)。
 
-* **日期国际化**
+*   **日期国际化**
 
-  对于日期来说，可以借助 [moment](https://github.com/moment/moment) 库，其自带国际化相关能力。目前社区比较主流的解决方案有以下两种：
+    对于日期来说，可以借助 [moment](https://github.com/moment/moment) 库，其自带国际化相关能力。目前社区比较主流的解决方案有以下两种：
 
-  方法一：
+    方法一：
 
-  ```js
-  const webpack = require('webpack');
-  
-  module.exports = {
-      // ...
-      plugins: [
-          // 打包指定需要的语言文件
-          new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /zh-cn|ja/),
-      ],
-  };
-  ```
+    ```js
+    const webpack = require('webpack');
 
-  方法二：
+    module.exports = {
+        // ...
+        plugins: [
+            // 打包指定需要的语言文件
+            new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /zh-cn|ja/),
+        ],
+    };
+    ```
 
-  ```js
-  const webpack = require('webpack');
-  
-  module.exports = {
-      // ...
-      plugins: [
-          // 只打包有过引用的语言文件，应用中需要添加如：`import 'moment/locale/zh-cn';`
-          // new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
-      ],
-  };
-  ```
+    方法二：
 
-- **内容国际化**
+    ```js
+    const webpack = require('webpack');
 
-  主流的内容国际化方案有：
+    module.exports = {
+        // ...
+        plugins: [
+            // 只打包有过引用的语言文件，应用中需要添加如：`import 'moment/locale/zh-cn';`
+            // new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+        ],
+    };
+    ```
 
-  [kiwi](https://github.com/nefe/kiwi) [有配套的 vscode 工具，持续关注]
+-   **内容国际化**
 
-  [react-intl](https://github.com/yahoo/react-intl) [yahoo]
+    主流的内容国际化方案有：
 
-  [react-intl-universal](https://github.com/alibaba/react-intl-universal) [alibaba]
+    [kiwi](https://github.com/nefe/kiwi) [有配套的 vscode 工具，持续关注]
 
-  [react-i18next](https://react.i18next.com/) [i18next.js]
+    [react-intl](https://github.com/yahoo/react-intl) [yahoo]
 
-  [i18n-pick](https://github.com/ProtoTeam/i18n-pick) [蚂蚁金服团队]
+    [react-intl-universal](https://github.com/alibaba/react-intl-universal) [alibaba]
 
-  [react-i18n](https://juejin.im/post/5c24a09d5188252a9412fabf) [腾讯 webnovel 团队，暂未开源]
+    [react-i18next](https://react.i18next.com/) [i18next.js]
+
+    [i18n-pick](https://github.com/ProtoTeam/i18n-pick) [蚂蚁金服团队]
+
+    [react-i18n](https://juejin.im/post/5c24a09d5188252a9412fabf) [腾讯 webnovel 团队，暂未开源]
 
 ### 自定义 webpack 配置
 
@@ -698,8 +688,6 @@ REACT_APP_VERSION=1.0
 
 -   Windows(cmd.ext): `set REACT_APP_SECRET_CODE=123&&npm start`
 -   Mac: `REACT_APP_SECRET_CODE=123 npm start`
-
-
 
 #### 使用环境变量
 

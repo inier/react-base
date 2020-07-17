@@ -22,23 +22,24 @@ const {
 
 // 自定义配置
 const {
-    buildFriendly,
-    speedMeasure,
     prerender,
     rewireReactHotLoader,
+    dropConsole,
+    extractVendors,
+    checkCLIOptions,
+    buildFriendly,
+    speedMeasure,
     vConsole,
     getWebpackAlias,
-    extractVendors,
-    vendorConfig,
     addStylelint,
     minimizer,
-    dropConsole,
     namedOptimize,
     optimizeLodash,
     optimizeMoment,
     rewireThemeIce,
     rewireThemeFusion,
-} = require('./config');
+    getVendorConfig,
+} = require('@ozo/cra-rewired');
 
 const pkgJSON = require(`${__dirname}/package.json`);
 
@@ -51,6 +52,8 @@ const postcssPlugins = [
 ];
 
 const { BUNDLE_VISUALIZE, STYLELINT, VCONSOLE, DROP_CONSOLE } = process.env;
+const hasVisualizer =
+    process.env.NODE_ENV === 'production' || BUNDLE_VISUALIZE === 'true' || checkCLIOptions('--visualize');
 console.log('当前环境：', process.env.NODE_ENV);
 
 module.exports = override(
@@ -61,7 +64,7 @@ module.exports = override(
     addWebpackAlias(getWebpackAlias(pkgJSON)),
     addPostcssPlugins(postcssPlugins),
     addStylelint(STYLELINT),
-    setWebpackOptimizationSplitChunks(vendorConfig),
+    setWebpackOptimizationSplitChunks(getVendorConfig()),
     // addWebpackExternals({
     //     react: 'React',
     //     'react-dom': 'ReactDom',
@@ -76,7 +79,7 @@ module.exports = override(
         drop_console: DROP_CONSOLE,
     }),
     // 开启打包速度分析
-    // speedMeasure(),
-    (process.env.NODE_ENV === 'production' || BUNDLE_VISUALIZE === 'true') && addBundleVisualizer()
-    // prerender(),
+    speedMeasure(),
+    prerender(),
+    hasVisualizer && addBundleVisualizer()
 );
