@@ -58,7 +58,6 @@ console.log('当前环境：', process.env.NODE_ENV);
 
 module.exports = override(
     vConsole(VCONSOLE),
-    rewireThemeIce(pkgJSON),
     rewireThemeFusion(pkgJSON),
     buildFriendly(),
     addWebpackAlias(getWebpackAlias(pkgJSON)),
@@ -69,7 +68,6 @@ module.exports = override(
     //     react: 'React',
     //     'react-dom': 'ReactDom',
     // }),
-    // extractVendors(),
     useEslintRc(),
     useBabelRc(),
     namedOptimize(),
@@ -80,6 +78,5 @@ module.exports = override(
     }),
     // 开启打包速度分析
     speedMeasure(),
-    prerender(),
     hasVisualizer && addBundleVisualizer()
 );
