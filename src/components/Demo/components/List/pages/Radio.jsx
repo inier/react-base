@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Radio, RadioGroup, RadioList, Demo } from '@/components';
-const { DemoShow, Section, Block } = Demo;
+import { Radio, RadioGroup, RadioList } from '@ozo/radio';
+import { DemoShow, Section, Block } from '@ozo/demo';
 
 class RadioDemo extends Component {
     constructor(props) {

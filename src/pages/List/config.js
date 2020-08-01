@@ -1,5 +1,3 @@
-import { lazy } from '@ozo/lazy-loader';
-
 // 组件类型列表
 const typeList = [
     {
@@ -57,6 +55,11 @@ export const regList = [
         title: '选项卡',
     },
     {
+        id: 'Toast',
+        type: 'module',
+        title: '轻提示',
+    },
+    {
         id: 'Button',
         type: 'basis',
         title: '按钮',
@@ -92,18 +95,6 @@ export const regList = [
         title: '字体图标',
     },
 ];
-
-// ListRouteConfig
-export const ListRouteConfig = regList.map((item) => {
-    const tId = item.id;
-    /* eslint-disable no-param-reassign */
-    item.path = `/demo/${tId.toLowerCase()}`;
-    return {
-        path: item.path,
-        title: item.title,
-        component: lazy(() => import(`./pages/${tId}`)),
-    };
-});
 
 // 列表转换
 regList.forEach((component) => {

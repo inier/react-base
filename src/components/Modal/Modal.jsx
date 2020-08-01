@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import { Button } from '@/components';
+import { Button } from '@material-ui/core';
 import CloseIcon from './components/CloseIcon';
 import './Modal.scss';
 
@@ -65,12 +65,12 @@ class Modal extends Component {
                         <div className={`${prefixCls}-footer border-t`}>
                             <div className="btnWrap btn-group">
                                 {hasMask && cancelTxt && (
-                                    <Button size="xs" onClick={this.handleCancel}>
+                                    <Button variant="contained" size="small" onClick={this.handleCancel}>
                                         {cancelTxt}
                                     </Button>
                                 )}
                                 {doneTxt && (
-                                    <Button size="xs" type="primary" onClick={this.handleDone}>
+                                    <Button variant="contained" size="small" color="primary" onClick={this.handleDone}>
                                         {doneTxt}
                                     </Button>
                                 )}

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Button, Modal, Demo } from '@/components';
-const { DemoShow, Section, Block } = Demo;
+import { Button, Modal } from '@/components';
+import { DemoShow, Section, Block } from '@ozo/demo';
 
 class ModalDemo extends Component {
     constructor(props) {

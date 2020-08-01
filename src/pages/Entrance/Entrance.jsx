@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import styles from './Entrance.module.scss';
 import logo from '@/assets/img/logo.svg';
 // import '../../demo.es6.js';
 
+@withRouter
 class Entrance extends Component {
     static displayName = 'Entrance';
 
@@ -24,11 +25,11 @@ class Entrance extends Component {
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    Learn React
+                    Hello React
                 </a>
                 <br />
                 <Link to="/list" className={styles.text}>
-                    {process.env.REACT_APP_NAME} 组件库 &gt;
+                    {process.env.REACT_APP_NAME} &gt;
                 </Link>
                 <div style={{ fontSize: '12px', color: '#999' }}>版本号：{process.env.REACT_APP_VERSION}</div>
             </div>

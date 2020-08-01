@@ -1,7 +1,6 @@
 import React from 'react';
 import 'balloon-css';
-import { Demo } from '@/components';
-const { DemoShow, Section, Block } = Demo;
+import { DemoShow, Section, Block } from '@ozo/demo';
 
 export default () => (
     <DemoShow>

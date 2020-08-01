@@ -1,70 +1,72 @@
-import React, { Component } from 'react';
-import styles from './ErrorBoundary.module.scss';
+// reference： https://github.com/bvaughn/react-error-boundary
 
-// 图片引入
-import BG_1 from './img/bc-1.png';
-import BG_2 from './img/bc-2.png';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import ErrorBoundaryFallback from './ErrorBoundaryFallback';
 
 class ErrorBoundary extends Component {
     static getDerivedStateFromError(error) {
         // Update state so the next render will show the fallback UI.
         return { hasError: true };
     }
+    static propTypes = {
+        onError: PropTypes.func,
+        Fallback: PropTypes.func,
+    };
+    static defaultProps = {
+        Fallback: ErrorBoundaryFallback,
+    };
 
     constructor(props) {
         super(props);
         this.state = {
             hasError: false,
+            error: null,
+            info: null,
         };
     }
 
     componentDidCatch(error, info) {
+        const { onError } = this.props;
+        if (typeof onError === 'function') {
+            try {
+                // istanbul ignore next: Ignoring ternary; can’t reproduce missing info in test environment.
+                onError && onError.call(this, error, info ? info.componentStack : '');
+            } catch (ignoredError) {
+                // ignored error
+            }
+        }
+
         // You can also log the error to an error reporting service
-        // logErrorToMyService(error, info);
+        this.logErrorToMyService(error, info);
     }
 
-    goHome = () => {
-        window.location.replace(window.location.origin + process.env.PUBLIC_URL);
-    };
-
-    refresh = () => {
-        window.location.reload();
+    logErrorToMyService = (error, info) => {
+        this.setState({
+            error,
+            info,
+        });
     };
 
     render() {
-        const { hasError } = this.state;
-        const { children } = this.props;
+        const { hasError, error, info } = this.state;
+        const { children, Fallback } = this.props;
 
-        if (hasError) {
+        // render fallback UI if there is error
+        if (hasError || error !== null) {
             return (
-                <div className={styles.content}>
-                    <img className={styles.BG_1} src={BG_1} alt="err bg" />
-                    <img className={styles.BG_2} src={BG_2} alt="err bg" />
-                    <div className={styles.tips}>
-                        <div className={styles.left}>可能的原因:&nbsp;</div>
-                        <div className={styles.right}>
-                            <div>·&nbsp;网络信号弱</div>
-                            <div>·&nbsp;找不到请求网页</div>
-                            <div>·&nbsp;输入的网址不正确</div>
-                        </div>
-                    </div>
-                    <div className={styles.buttons}>
-                        <div className={`${styles.refresh} ${styles.btn}`} onClick={this.refresh}>
-                            刷新本页
-                        </div>
-                        <div className={`${styles.home} ${styles.btn}`} onClick={this.goHome}>
-                            回到首页
-                        </div>
-                    </div>
-                </div>
+                <Fallback
+                    componentStack={
+                        // istanbul ignore next: Ignoring ternary; can’t reproduce missing info in test environment.
+                        info ? info.componentStack : ''
+                    }
+                    error={error}
+                />
             );
         }
-        return children;
+
+        return children || null;
     }
 }
-
-// index.propTypes = {
-
-// };
 
 export default ErrorBoundary;

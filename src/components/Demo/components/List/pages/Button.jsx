@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Button, Demo } from '@/components';
-const { DemoShow, Section, Block } = Demo;
+import { Button } from '@/components';
+import { DemoShow, Section, Block } from '@ozo/demo';
 
 class ButtonDemo extends Component {
     render() {

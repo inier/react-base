@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
-import { Collapse, Demo, List, Placeholder } from '@/components';
+import { DemoShow, Section } from '@ozo/demo';
+import { Collapse, List, Placeholder } from '@/components';
 import comConfig from '../config.js';
 
-const { DemoShow, Section } = Demo;
 const Panel = Collapse.Panel;
 
 const arrowPath =

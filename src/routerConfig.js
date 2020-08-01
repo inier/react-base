@@ -1,6 +1,6 @@
 // src/routerConfig.js
 
-import { DemoRouteConfig } from '@/components';
+import { DemoRouteConfig } from '@/components/Demo';
 import { Entrance, List, Doc, About, IframeView } from '@/pages';
 
 const DemoRouters = DemoRouteConfig.map((item) => ({

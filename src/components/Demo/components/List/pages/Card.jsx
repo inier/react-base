@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button, Card, CardLite, Demo } from '@/components';
-const { DemoShow, Section } = Demo;
+import { Button, Card, CardLite } from '@/components';
+import { DemoShow, Section } from '@ozo/demo';
 
 export default () => (
     <DemoShow>

@@ -13,5 +13,26 @@
     "path-autocomplete.pathMappings": {
         "@": "${workspaceRoot}/src"
     },
-    "path-autocomplete.extensionOnImport": true
+    "path-autocomplete.extensionOnImport": true,
+    "cSpell.words": [
+        "alifd",
+        "alifd theme chm",
+        "bizcharts",
+        "browserslist",
+        "chm",
+        "corejs",
+        "css",
+        "css mqpacker",
+        "eslint",
+        "eslint plugin flowtype",
+        "flowtype",
+        "mixins",
+        "mqpacker",
+        "ozo",
+        "ozo mixins sass",
+        "plugin",
+        "predeploy",
+        "sass",
+        "theme"
+    ]
 }

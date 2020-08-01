@@ -1,7 +1,6 @@
 import React from 'react';
-import { Tabs, Demo } from '@/components';
-
-const { DemoShow, Section } = Demo;
+import { Tabs } from '@/components';
+import { DemoShow, Section } from '@ozo/demo';
 
 const tabs = [
     {

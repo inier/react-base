@@ -9,7 +9,7 @@ module.exports = {
     },
     production: {
         // NODE_ENV: 'production',
-        BUNDLE_VISUALIZE: true,
+        // BUNDLE_VISUALIZE: false,
     },
     debug: {
         GENERATE_SOURCEMAP: true, // 开启SOURCEMAP

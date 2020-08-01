@@ -1,6 +1,6 @@
 import React from 'react';
-import { Heading, Demo } from '@/components';
-const { DemoShow, Section } = Demo;
+import { Heading } from '@/components';
+import { DemoShow, Section } from '@ozo/demo';
 
 export default () => (
     <DemoShow>

@@ -5,8 +5,12 @@ import styles from './index.module.scss';
 
 // loading图标和错误提示的组件
 class ToastAndLoading extends Component {
+    state = {
+        loading: false,
+        toastMsg: false,
+    };
     render() {
-        const { loading, toastMsg } = this.props;
+        const { loading, toastMsg } = this.state;
         return (
             <React.Fragment>
                 {!!toastMsg && (

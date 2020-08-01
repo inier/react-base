@@ -6,7 +6,6 @@ import { BasicLayout, MainLayout, BlankLayout } from '@/layouts';
 
 // 应用路由：配合routerConfig进行配置
 // 按照 Layout 分组路由，适合复杂项目
-// 如果要使用动画路由，直接将Switch替换为AnimatedRoute组件
 const Routers = () => {
     return (
         <Router basename={process.env.PUBLIC_URL}>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter, Prompt } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Modal } from '..';
+import Modal from '../Modal/index';
 // import styles from './Prompt.module.scss';
 
 const modalShow = (title, content, handleCancel, handleDone, ...tProps) => (

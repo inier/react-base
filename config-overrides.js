@@ -39,6 +39,7 @@ const {
     rewireThemeIce,
     rewireThemeFusion,
     getVendorConfig,
+    useEslintConfig,
 } = require('@ozo/cra-rewired');
 
 const pkgJSON = require(`${__dirname}/package.json`);
@@ -53,30 +54,49 @@ const postcssPlugins = [
 
 const { BUNDLE_VISUALIZE, STYLELINT, VCONSOLE, DROP_CONSOLE } = process.env;
 const hasVisualizer =
-    process.env.NODE_ENV === 'production' || BUNDLE_VISUALIZE === 'true' || checkCLIOptions('--visualize');
+    process.env.NODE_ENV === 'production' || BUNDLE_VISUALIZE === 'true' || checkCLIOptions('--analyze');
 console.log('当前环境：', process.env.NODE_ENV);
 
-module.exports = override(
-    vConsole(VCONSOLE),
-    rewireThemeFusion(pkgJSON),
-    buildFriendly(),
-    addWebpackAlias(getWebpackAlias(pkgJSON)),
-    addPostcssPlugins(postcssPlugins),
-    addStylelint(STYLELINT),
-    setWebpackOptimizationSplitChunks(getVendorConfig()),
-    // addWebpackExternals({
-    //     react: 'React',
-    //     'react-dom': 'ReactDom',
-    // }),
-    useEslintRc(),
-    useBabelRc(),
-    namedOptimize(),
-    optimizeLodash(),
-    optimizeMoment(),
-    minimizer({
-        drop_console: DROP_CONSOLE,
-    }),
-    // 开启打包速度分析
-    speedMeasure(),
-    hasVisualizer && addBundleVisualizer()
-);
+module.exports = {
+    webpack: override(
+        buildFriendly(),
+        // 开启打包速度分析
+        speedMeasure(),
+        hasVisualizer && addBundleVisualizer(),
+        addWebpackAlias(getWebpackAlias(pkgJSON)),
+        vConsole(VCONSOLE),
+        addStylelint(STYLELINT),
+        addPostcssPlugins(postcssPlugins),
+        // 使用.eslintrc.js 覆盖CRA的eslint规则
+        useEslintConfig(require('./.eslintrc.js')),
+        useBabelRc(),
+        setWebpackOptimizationSplitChunks(getVendorConfig()),
+        // addWebpackExternals({
+        //     react: 'React',
+        //     'react-dom': 'ReactDom',
+        // }),
+        namedOptimize(),
+        optimizeLodash(),
+        optimizeMoment(),
+        minimizer({
+            drop_console: DROP_CONSOLE,
+        })
+    ),
+    jest: override(
+        (() => (config) => {
+            const jestExtLibs = ['lodash-es'].join('|');
+            const key = 'transformIgnorePatterns';
+
+            if (key === 'transformIgnorePatterns' && Array.isArray(config[key]) && config[key].length) {
+                const tIndex = config[key].findIndex((item) => {
+                    return item.includes('node_modules');
+                });
+                if (tIndex !== -1) {
+                    config[key].splice(tIndex, 1, `/node_modules/(?!(${jestExtLibs}))`);
+                }
+            }
+
+            return config;
+        })()
+    ),
+};

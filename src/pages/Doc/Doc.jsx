@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Demo, DemoListWithApi, Placeholder } from '@/components';
-const { DemoShow, Section } = Demo;
+import { DemoShow, Section } from '@ozo/demo'
+import { Placeholder } from '@/components';
+import { DemoListWithApi } from '@/components/Demo';
 
 class Doc extends Component {
     constructor(props) {

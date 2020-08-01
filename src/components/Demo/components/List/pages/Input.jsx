@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { InputSingle, Demo } from '@/components';
+import { InputSingle } from '@/components';
 import { isMicroMessenger, getIOSVersion } from '@/utils';
-
-const { DemoShow, Section } = Demo;
+import { DemoShow, Section } from '@ozo/demo';
 
 class InputDemo extends Component {
     constructor(props) {

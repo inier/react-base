@@ -6,7 +6,7 @@
 
 基于 create-react-app v3(简称 cra3)创建，整合了 react router 等基础组件，旨在作为基础工程以便能快速衍生其他复杂工程模板。
 
-本文档部分内容来自官方文档，如需查看原版请[点击这里](https://github.com/facebookincubator/create-react-app/blob/master/README.md)
+本文档部分内容来自官方文档[create-react-app 项目地址](https://github.com/facebookincubator/create-react-app/blob/master/README.md)，详情参考 [中文文档](https://www.html.cn/create-react-app/), [英文文档](https://create-react-app.dev/)
 
 CRA3 升级的特性，可以参考 releases[https://github.com/facebook/create-react-app/releases/tag/v3.0.1], [英文文档](https://www.colabug.com/6107594.html) ，[中文文档](https://www.oschina.net/news/106172/create-react-app-3-released)
 
@@ -39,6 +39,7 @@ CRA2 升级的特性，可以参考[英文文档](https://reactjs.org/blog/2018/
 -   React 16+
 -   ES6+
 -   node-sass 4+
+-   jest + react-testing-library
 
 ## 项目规范
 
@@ -344,7 +345,12 @@ import styles from './xxx.module.scss';
 
 样式继承：开启 CSS-Module 功能后，样式继承请使用[如下方法](https://github.com/css-modules/css-modules#dependencies)。
 
-使用字体图标
+> 如果由于某种原因需要禁用 Autoprefixer，请 [按照本节进行操作](https://github.com/postcss/autoprefixer#disabling) 。
+>
+> 默认情况下 禁用了 [CSS Grid(网格) 布局](https://www.html.cn/archives/8510) 前缀，但不会删除手动前缀。 如果你想选择加入 CSS Grid(网格) 前缀，请先 [熟悉一下它的局限性](https://github.com/postcss/autoprefixer#does-autoprefixer-polyfill-grid-layout-for-ie)。
+> 要启用 CSS Grid(网格) 前缀，请将 `/* autoprefixer grid: on */` 添加到 CSS 文件的顶部。
+
+### 使用字体图标
 
 ##### 平台型协同方式的字体图标
 
@@ -492,6 +498,10 @@ useStrict(true);
 详情请参考[create-react-app 官方文档](https://facebook.github.io/create-react-app/docs/running-tests)
 
 > 集成测试/功能测试/性能测试/渲染测试
+@testing-library/react 测试React Component的库
+@testing-library/react-hooks 测试自己写的的React Hooks的库
+@testing-library/jest-dom 提供更多利于dom测试的断言
+
 
 ## 代码提交
 
@@ -782,6 +792,19 @@ cra 通过 GENERATE_SOURCEMAP 来控制 sourcemap 的开启和关闭，在.env-c
 详情参见[低版本浏览器兼容](doc/低版本浏览器兼容.md)。
 
 ### 在开发中使用 https
+
+#### 通过环境变量设置
+
+```
+module.exports = {
+    development: {
+        ...
+        // 在开发环境中使用 HTTPS, 默认未开启
+        HTTPS: true,
+    },
+    ...
+}
+```
 
 #### Windows (cmd.exe)
 
