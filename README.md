@@ -8,9 +8,7 @@
 
 本文档部分内容来自官方文档[create-react-app 项目地址](https://github.com/facebookincubator/create-react-app/blob/master/README.md)，详情参考 [中文文档](https://www.html.cn/create-react-app/), [英文文档](https://create-react-app.dev/)
 
-CRA3 升级的特性，可以参考 releases[https://github.com/facebook/create-react-app/releases/tag/v3.0.1], [英文文档](https://www.colabug.com/6107594.html) ，[中文文档](https://www.oschina.net/news/106172/create-react-app-3-released)
 
-CRA2 升级的特性，可以参考[英文文档](https://reactjs.org/blog/2018/10/01/create-react-app-v2.html) ，[中文文档](https://www.css88.com/archives/9739)
 
 ## 技术特性
 
@@ -31,15 +29,11 @@ CRA2 升级的特性，可以参考[英文文档](https://reactjs.org/blog/2018/
 
 更多特性，赶快体验！
 
-## 依赖环境
+> CRA3 升级的特性，可以参考 releases[https://github.com/facebook/create-react-app/releases/tag/v3.0.1], [英文文档](https://www.colabug.com/6107594.html) ，[中文文档](https://www.oschina.net/news/106172/create-react-app-3-released)
 
--   node 8+
--   babel 7
--   webpack 4
--   React 16+
--   ES6+
--   node-sass 4+
--   jest + react-testing-library
+> CRA2 升级的特性，可以参考[英文文档](https://reactjs.org/blog/2018/10/01/create-react-app-v2.html) ，[中文文档](https://www.css88.com/archives/9739)
+
+
 
 ## 项目规范
 
@@ -84,7 +78,7 @@ CRA2 升级的特性，可以参考[英文文档](https://reactjs.org/blog/2018/
 │   	  	└── index.js 	     # 组件的export
 │   	└── index.js    	  	 # 所有组件的统一export
 │
-│   ├── layouts/     		  	 # 常量目录（可选）
+│   ├── constants/     		  	 # 常量目录（可选）
       └── index.js	  	  	 # 常量的统一export
 
 │   ├── layouts/     		  	 # 项目布局集合，用于路由分层
@@ -204,15 +198,24 @@ CRA2 升级的特性，可以参考[英文文档](https://reactjs.org/blog/2018/
 
 -   推荐通过各类目录下的 index.js 统一 export。便于对该目录下的资源或组件进行统一注册、替换和添加描述备注等，提高可维护性。
 -   通过@、@/components、@components 等别名来引入组件。
-
 -   开发前先根据页面梳理组件，并对组件分级；做好 store 划分，提取公共数据处理逻辑。
 -   尽量做到页面均由**布局组件**+ **通用组件/项目级功能组件**组成，不含原子标签（div、span 等）。
 
-## 开发调试
 
-### 安装依赖
 
-国内推荐使用 yarn 或 cnpm，npm 可能无法正常安装 node-sass。
+## 依赖环境
+
+-   node 8+
+-   babel 7
+-   webpack 4
+-   React 16+
+-   ES6+
+-   node-sass 4+
+-   jest + react-testing-library
+
+### 安装
+
+默认使用 yarn，npm 可能无法正常安装 node-sass。若yarn安装node-sass失败，可通过cnpm单独安装node-sass。
 
 ```plain
 > yarn
@@ -228,25 +231,62 @@ CRA2 升级的特性，可以参考[英文文档](https://reactjs.org/blog/2018/
 
 > 推荐编辑器 [Visual Studio Code](https://code.visualstudio.com/)，如果出现 vscode 占用系统资源 100%的情况，请检查是否安装了 SCSS InterliSense 、IntelliSense for CSS class names in HTML 插件，若存在，请关闭这类插件。\*\*\*\*
 
-### 使用全局别名
 
-已定义以下全局别名：
 
-```js
-{
-    ['@']: resolve('src'),
-    ['@style']: resolve('style'),  // style样式重置文件别名
-}
-```
-
-> 使用别名，scss 名称@import 时需要写完整，文件名中的\_ 和 .scss 后缀名不能少。
-> 使用第三方库的 css 时，可以通过`~`引入或写全`node_modules`的路径。
+## 开发相关
 
 ### 修改入口页标题
 
 如果要修改网页标题，请修改 package.json 的 title 字段；或者修改 public/index.html 中的<title>标签内容。
 还可替换 favicon.ico 为自己的 ico。
 manifest.json 中的信息也一并修改。
+
+### 使用全局别名
+
+已定义以下全局别名：`@`代表src目录、`@theme`代表当前项目配置的主题（在package.json中配置）;
+
+```js
+// package.json
+{
+  "buildConfig": {
+    "theme": {
+      "alifd": "@alifd/theme-xxx"
+    }
+  },
+}
+```
+
+> 使用别名，scss 名称@import 时需要写完整，文件名中的\_ 和 .scss 后缀名不能少。
+> 使用第三方库的 css 时，可以通过`~`引入或写全`node_modules`的路径。
+
+### 组件的异步加载
+
+默认情况下，webpack 会将引用到的包都打包到同一个 JS 文件中，入口 js 文件体积可能会很大。通过按需加载，可以使之变小。方法引入：
+
+```js
+import { lazy } from '@ozo/lazy-loader';
+const Login = lazy(() => import('./UserLogin'));
+
+<Route  path='/Login' component={Login}/>
+```
+
+> 更多用法可查看[ `@ozo/lazy-loader`的使用说明](https://www.npmjs.com/package/@ozo/lazy-loader)。
+
+### 组件Import顺序
+
+统一编写习惯，方便团队成员形成统一的“表达“，减轻代码阅读负担。推荐顺序为：
+
++ 通用基础库：prop-types、classnames、lodash-es等
++ react基础库：react、react-dom、react-router-dom等
++ mobx、redux基础库：mobx、mobx-react等
++ 第三方组件库：@alifd/next等，库附带的样式文件跟随其后
++ 项目级组件：@/components/xxx
++ 页面级组件：./components/xxx
++ 项目级工具类：@/utils/xxx
++ 页面样式文件：css、scss文件，注意引入顺序，按影响程度引入，影响最直接的放在最后
++ 图片、json等静态资源，比较多时可考虑单独的文件集中导入/导出管理
+
+> webpack生产打包时，scss的顺序是按照代码执行的顺序，谁先import就先打包谁。
 
 ### 设计与开发协同
 
@@ -256,14 +296,14 @@ manifest.json 中的信息也一并修改。
 
 ##### 定义 SCSS 变量
 
-项目开发中，对于在主题包之外的公共特性，如颜色、字号等，可以统一定义到`src/settings.scss`文件中，以便于后期维护和管理。注意命名规范和分组。
+项目开发中，对于在主题包之外的公共特性，如颜色、字号等，统一定义到`src/settings.scss`文件中，以便于后期维护和管理。注意命名规范和分组。
 
 ```scss
 // ./src/settings.scss
 $modal-color: #f33;
 
 // 组件的xxx.scss
-@import '@settings'; //引入路径根据组件scss文件位置进行修正
+@import '@/settings'; //引入路径根据组件scss文件位置进行修正
 .content {
     color: $modal-color;
 }
@@ -274,7 +314,7 @@ $modal-color: #f33;
 脚手架默认引入了一些常用的 mixins，使用方法参考：https://github.com/inier/mixins。
 
 ```scss
-@import '~@style/settings'; //引入路径根据组件scss文件位置进行修正
+@import '@/settings'; //引入路径根据组件scss文件位置进行修正
 
 /*-------- 极细边框 --------*/
 // 上、右、下、左边框
@@ -287,13 +327,13 @@ $modal-color: #f33;
 }
 ```
 
-此外，也可以在`style/settings.scss`文件中自定义 mixins。
+此外，也可以在 `@/settings.scss` 文件中自定义 mixins。
 
 ##### 不开启 CSS-Module
 
 css 样式可以选择是否开启 CSS-Module 功能，先介绍不开启的方式。
 
-第 1 步： 样式文件命名为 xxx.scss;
+第 1 步：样式文件命名为 xxx.scss;
 
 ```scss
 .content {
@@ -316,9 +356,9 @@ import './xxx.scss';
 
 > 未开启 CSS-Module 功能，将需要注意避免各组件间的样式冲突，推荐 BEM 命名规范，用法自行搜索。
 
-##### 开启了 CSS-Module 功能
+##### 开启 CSS-Module 功能
 
-第 1 步： 样式文件命名为 xxx.module.scss;
+第 1 步：样式文件命名为 xxx.module.scss;
 
 ```scss
 .content {
@@ -329,9 +369,10 @@ import './xxx.scss';
 }
 ```
 
-第 2 步：在 jsx 中引入时使用`import styles from './xxx.module.scss';`
+第 2 步：在 jsx 中引入时使用 `import styles from './xxx.module.scss';`
 
 ```js
+...
 import styles from './xxx.module.scss';
 ...
 <main className={styles.content}>
@@ -351,10 +392,6 @@ import styles from './xxx.module.scss';
 > 要启用 CSS Grid(网格) 前缀，请将 `/* autoprefixer grid: on */` 添加到 CSS 文件的顶部。
 
 ### 使用字体图标
-
-##### 平台型协同方式的字体图标
-
-采用平台型协同方式时，可在 fusion 平台统一管理字体图标（同样依赖 iconfont.cn 库）。不用像上面一样单独引入 iconfont.css。
 
 ##### 引入在线字体图标
 
@@ -388,6 +425,10 @@ import styles from './xxx.module.scss';
 
 > 这种情况下，本地字体图标文件，一般会被完整打包到 js 中，也可通过打包手段分离出来。
 
+##### 平台型协同方式的字体图标（推荐）
+
+采用平台型协同方式时，可在 fusion 平台统一管理字体图标（同样依赖 iconfont.cn 库）。不用单独引入 iconfont.css。
+
 ### 引入图片等资源
 
 为了减小 Http 的请求数目，在打包时 webpack 会将小于 10k 的图片直接转换成 base64 字符串放在 html 中。
@@ -415,32 +456,32 @@ export default Header;
 }
 ```
 
-### 异步加载组件
+### 配置API调用接口
 
-因为默认情况下，webpack 会将引用到的包都打包到同一个 JS 文件中，所以可能入口 js 文件可能会很大。
-为了使用之变小，在使用 react-router 打开组件时，请使用如下方法引入
+在本地开发时，前端调用的接口都是跨域的，需要进行代理。将相对路径配`./src/api/ApiUrl.js`中即可。
 
-```js
-const Login =()=><Async load={import('./Login')}/>
+```
+// ./src/api/ApiUrl.js
 
-<Route  path='/Login' component={Login}/>
+const urls = {
+    ...
+    POST_LOGIN: '/main/login',
+    GET_RESPONSE_CODE: '/resc/list'
+    ...
+}
 ```
 
-### 调用接口
+API接口命名采用全大写字母，下划线拼接，建议以对应的提交方式`GET`和`POST`等冠名，以便直观的显示。
 
-在本地开发时，将相对路径配`./src/apiApiUrl.js`中即可。
-例如：`LOGIN: '/login'`
-
-> 由于现在都是前后的分离的，前端调用的接口都是跨域的，所以需要进行代理。
-
-### 配置代理
+### 配置开发环境代理
 
 在`src/setupProxy.js`中参照一下配置：
 
 ```js
 module.exports = function (app) {
     app.use(
-        proxy('/api', {
+        '/api',
+        createProxyMiddleware({
             target: 'http://localhost',
             changeOrigin: true,
             pathRewrite: {
@@ -448,59 +489,129 @@ module.exports = function (app) {
             },
         })
     );
+    ...
 };
 ```
 
 > 具体代理规则，请先到接口通用处理逻辑中根据自己接口返回结果的格式情况，进行修改。
 
-这样配置后所有带有`/api`的接口请求都会被代理到`http://localhost`。
-
-具体用法请参考`http-proxy-middleware`组件的官方使用方法https://github.com/chimurai/http-proxy-middleware。
+这样配置后所有带有`/api`的接口请求都会被代理到`http://localhost`。具体用法请参考[`http-proxy-middleware`组件的官方用法](https://github.com/chimurai/http-proxy-middleware)。
 
 ### mobx 开发相关
 
-采用主流的 mobx4， 支持 es5。
-
-mobx5 新增，因采用 Proxy 对象，部分机型不支持。
-
-详情请参考[mobx 开发手册](https://cn.mobx.js.org/)。
+优先使用最新版本的mobx5，该版本采用 Proxy 对象，部分机型不支持。对兼容性有要求的可以降低到mobx3、或mobx4（支持 es5）。详情请参考[mobx 开发手册](https://cn.mobx.js.org/)。
 
 ##### mobx 开启严格模式
 
 mobx 开启严格模式，必须使用@action 来修改数据
 
 ```js
-// mobx5 特定值，  //https://cn.mobx.js.org/refguide/api.html  +  https://blog.csdn.net/smk108/article/details/83185745
+// mobx5，匹配mobx-react6.x，  //https://cn.mobx.js.org/refguide/api.html  +  https://blog.csdn.net/smk108/article/details/83185745
 configure({
     enforceActions: 'observed',
 });
-// mobx4
+
+// mobx4，匹配mobx-react5.x
 configure({
     enforceActions: true,
 });
 
-// mobx3及以下
+// mobx3及以下，匹配mobx-react4.x
 useStrict(true);
 ```
 
-### 调试相关
+> 注意与之搭配的mobx-react库。
+
+### 开启/关闭 sourcemap
+
+cra 通过 GENERATE_SOURCEMAP 来控制 sourcemap 的开启和关闭，在.env-cmdrc.js 文件中对应的环境下，增加`"GENERATE_SOURCEMAP": false`, false 为关闭 sourcemap，true 为开启 sourcemap。
+
+```js
+{
+  "development": {
+    "REACT_APP_HMR": false
+  },
+  "production": {
+    "GENERATE_SOURCEMAP": false,
+    "BUNDLE_VISUALIZE": true
+  },
+  "test": {
+  },
+  "uat": {
+    "PORT": 8080
+  }
+}
+```
+
+### 启用 PWA 特性
+
+CRA 支持 workbox，可以一键开启 PWA（Progressive Web App）。在`src/index.js` 文件中有以下代码：
+
+```js
+serviceWorker.unregister();
+```
+
+如果要使用 CRA 提供的 PWA 特性的话，我们需要将`serviceWorker.unregister()` 改为`serviceWorker.register()`。打包项目后，在`build`文件夹下有以下几个文件：
+
+-   asset-manifest.json // 存放本次打包后资源的路径及 hash，用于区分版本
+-   server-worker.js // 规定了资源缓存策略
+-   preche-manifest.xxxxxxxxx.js // 静态资源版本记录
+-   manifest.json // Web 应用程序清单,可以配置在系统桌面上的图标等，参考[文档](https://developer.mozilla.org/zh-CN/docs/Web/Manifest)
+
+> 在 src 文件目录下有一个 serviceWorker.js 文件，用于检查环境变量是否为“production”，且当前浏览器是否兼容 service worker。
+
+### 代码检查
+
+本工程中采用的检查工具包括：
+
++ [**ESLint**](./doc/ESlint+Prettier配置.md)：用于检查 js 的逻辑错误；
++ [**Prettier**](./doc/ESlint+Prettier配置.md)：用于格式化 js 的格式；
++ [**Stylelint**](./doc/Stylelint配置.md)：用于检查css、scss等样式的语法和书写等。
+
+##### ESLint 禁用检查
+
+http://eslint.cn/docs/user-guide/configuring#disabling-rules-with-inline-comments
+
+##### Stylelint 禁用检查
+
+跟 eslint 类似，通过 `stylelint-disable` 注释来局部禁用某一项规则。通过 `stylelint-enable` 可以把之前忽略的规则重新开启。一定要注意，只 enable 对应的规则，形成呼应：
+
+```html
+<style>
+    .classA {
+        /* stylelint-disable declaration-block-no-duplicate-properties */
+        transition-property: transform;
+        transition-property: transform, -webkit-transform;
+        /* stylelint-enable declaration-block-no-duplicate-properties */
+    }
+</style>
+```
+
+### 低版本浏览器兼容
+
+详情参见[低版本浏览器兼容](doc/低版本浏览器兼容.md)。
+
+
+
+## 本地调试
 
 #### 使用 VSCode 调试
 
 本工程可以使用 VSCode 进行调试。但需要先安装这个[Debugger for Chrome](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome)
 
-## 软件测试（待更新）
+
+
+## 测试相关（待更新）
 
 ### 单元测试
 
-测试：`yarn test` 或者 `npm test`，See the section about [running tests](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#running-tests) for more information.
-
-详情请参考[create-react-app 官方文档](https://facebook.github.io/create-react-app/docs/running-tests)
+测试：`yarn test` 或者 `npm test`，详情请参考[create-react-app 官方文档](https://facebook.github.io/create-react-app/docs/running-tests)。
 
 > 集成测试/功能测试/性能测试/渲染测试
 @testing-library/react 测试React Component的库
 @testing-library/react-hooks 测试自己写的的React Hooks的库
 @testing-library/jest-dom 提供更多利于dom测试的断言
+
 
 
 ## 代码提交
@@ -532,17 +643,19 @@ To format our code whenever we make a commit in git, we need to install the foll
 
 此外，还可以使用工具根据提交记录自动生成更新说明 (CHANGELOG)，免去手动更新的痛苦，也方便用户了解每次更新的具体内容。具体参考[更新说明规范指南](doc/分支及版本发布规范.md)。
 
+
+
 ## 构建发布
 
--   构建：`yarn build`或`npm run build`，App 构建出发布的文件到 `build` 目录.
+-   构建：`yarn build`或`npm run build`，App 构建出发布的文件到 `build` 目录。
 
--   发布：将 build 目录下的文件发布到服务器上即可；该环节推荐通过搭建 CI/CD 平台来自动完成。
+-   发布：将 build 目录下的文件发布到对应node服务器上即可；该环节推荐通过搭建 CI/CD 平台来自动完成。
+
+
 
 ## Code Review
 
-CodeReview 的目的是提升代码质量，尽早发现潜在缺陷与 BUG，降低修复成本，同时促进团队内部知识共享，帮助更多人更好地理解系统，这也是帮助新人成长最快的方式之一。
-
-详情参考[CodeReview 规范](doc/CodeReview规范.md)。
+CodeReview 的目的是提升代码质量，尽早发现潜在缺陷与 BUG，降低修复成本，同时促进团队内部知识共享，帮助更多人更好地理解系统，这也是帮助新人成长最快的方式之一。详情参考[CodeReview 规范](doc/CodeReview规范.md)。
 
 参考文章：
 
@@ -551,6 +664,8 @@ https://www.zhihu.com/question/41089988?sort=created
 https://blog.csdn.net/uxyheaven/article/details/49773619
 
 http://www.cnblogs.com/cnblogsfans/p/5075073.html
+
+
 
 ## 进阶配置
 
@@ -629,7 +744,7 @@ http://www.cnblogs.com/cnblogsfans/p/5075073.html
 
 环境变量有以下几种设置方式：
 
-##### env-cmd 的 rc 文件集中管理【推荐】
+##### env-cmd 的 rc 文件集中管理（推荐）
 
 使用[env-cmd](https://github.com/toddbluhm/env-cmd)工具可以方便的对文件进行管理。
 
@@ -730,70 +845,9 @@ html 中使用：
 <title>%REACT_APP_WEBSITE_NAME%</title>
 ```
 
-### 启用 PWA 特性
-
-CRA 支持 workbox，可以一键开启 PWA（Progressive Web App）。在`src/index.js` 文件中有以下代码：
-
-```js
-serviceWorker.unregister();
-```
-
-如果要使用 CRA 提供的 PWA 特性的话，我们需要将`serviceWorker.unregister()` 改为`serviceWorker.register()`。打包项目后，在`build`文件夹下有以下几个文件：
-
--   asset-manifest.json // 存放本次打包后资源的路径及 hash，用于区分版本
--   server-worker.js // 规定了资源缓存策略
--   preche-manifest.xxxxxxxxx.js // 静态资源版本记录
--   manifest.json // Web 应用程序清单,可以配置在系统桌面上的图标等，参考[文档](https://developer.mozilla.org/zh-CN/docs/Web/Manifest)
-
-> 在 src 文件目录下有一个 serviceWorker.js 文件，用于检查环境变量是否为“production”，且当前浏览器是否兼容 service worker。
-
-### ESLint 禁用检查
-
-http://eslint.cn/docs/user-guide/configuring#disabling-rules-with-inline-comments
-
-### Stylelint 禁用检查
-
-跟 eslint 类似，通过 `stylelint-disable` 注释来局部禁用某一项规则。通过 `stylelint-enable` 可以把之前忽略的规则重新开启。一定要注意，只 enable 对应的规则，形成呼应：
-
-```html
-<style>
-    .classA {
-        /* stylelint-disable declaration-block-no-duplicate-properties */
-        transition-property: transform;
-        transition-property: transform, -webkit-transform;
-        /* stylelint-enable declaration-block-no-duplicate-properties */
-    }
-</style>
-```
-
-### 开启/关闭 sourcemap
-
-cra 通过 GENERATE_SOURCEMAP 来控制 sourcemap 的开启和关闭，在.env-cmdrc 文件中对应的环境下，增加"GENERATE_SOURCEMAP": false, false 为关闭 sourcemap，true 为开启 sourcemap。
-
-```js
-{
-  "development": {
-    "REACT_APP_HMR": false
-  },
-  "production": {
-    "GENERATE_SOURCEMAP": false,
-    "BUNDLE_VISUALIZE": true
-  },
-  "test": {
-  },
-  "uat": {
-    "PORT": 8080
-  }
-}
-```
-
-### 低版本浏览器兼容
-
-详情参见[低版本浏览器兼容](doc/低版本浏览器兼容.md)。
-
 ### 在开发中使用 https
 
-#### 通过环境变量设置
+##### 通过环境变量设置
 
 ```
 module.exports = {
@@ -806,7 +860,7 @@ module.exports = {
 }
 ```
 
-#### Windows (cmd.exe)
+##### Windows (cmd.exe)
 
 ```cmd
 set HTTPS=true&&npm start
@@ -814,7 +868,7 @@ set HTTPS=true&&npm start
 
 (Note: the lack of whitespace is intentional.)
 
-#### Linux, macOS (Bash)
+##### Linux, macOS (Bash)
 
 ```bash
 HTTPS=true npm start
@@ -822,17 +876,19 @@ HTTPS=true npm start
 
 ### 应用第三方 JS
 
-#### node 模块引用
+##### node 模块引用
 
 使用 npm 安装后，直接在 js 文件中 import 即可。
 
-#### 单个 JS 文件引用
+##### 单个 JS 文件引用
 
 如果文件符合 AMD/CMD 规范可以直接 import，如果不符合请在 public/index.html 中引入
 
 ### 推荐库
 
-详情请见[推荐库](doc/推荐库.md)
+详情请见[推荐库](doc/推荐库.md)。
+
+
 
 ## 附录
 
