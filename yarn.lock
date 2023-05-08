@@ -2108,10 +2108,10 @@
   dependencies:
     mkdirp "^1.0.4"
 
-"@ozo/cra-rewired@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.npmjs.org/@ozo/cra-rewired/-/cra-rewired-1.0.5.tgz#7cb69d2bf00cefc8881419c06326078ff5033d15"
-  integrity sha512-RjD5vGlbizMeQTfvEH2PL7G5eKxc2J5nM4c07SyKh0MbKn1PSN4I8eUCdd3mX3ZrtoS7w5jbjho9SSQeNOOccA==
+"@ozo/cra-rewired@^1.0.6":
+  version "1.0.7"
+  resolved "https://registry.npmmirror.com/@ozo/cra-rewired/-/cra-rewired-1.0.7.tgz#5b72d056a6fa36cb45bb35b3d9c6165a0dfac101"
+  integrity sha512-IXMGdW2hoOLr28A+8fs+Kj3Iet3xCzAkuwAY7Pr7a4euyuXkBUrXGu3qcoR8wpw/KmSyl2Ywq9WknRvE/KflMg==
   dependencies:
     "@alifd/next-theme-loader" "^1.x"
     "@alifd/next-theme-webpack-plugin" "^1.x"
@@ -5263,9 +5263,9 @@ decamelize@^1.1.0, decamelize@^1.1.1, decamelize@^1.1.2, decamelize@^1.2.0:
   integrity sha1-9lNNFRSCabIDUue+4m9QH5oZEpA=
 
 decode-uri-component@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.npm.taobao.org/decode-uri-component/download/decode-uri-component-0.2.0.tgz#eb3913333458775cb84cd1a1fae062106bb87545"
-  integrity sha1-6zkTMzRYd1y4TNGh+uBiEGu4dUU=
+  version "0.2.2"
+  resolved "https://registry.npmmirror.com/decode-uri-component/-/decode-uri-component-0.2.2.tgz#e69dbe25d37941171dd540e024c444cd5188e1e9"
+  integrity sha512-FqUYQ+8o158GyGTrMFJms9qh3CqTKvAqgqsTnkLI8sKu0028orqBhxNMFkFen0zGyg6epACD32pjVk58ngIErQ==
 
 dedent@^0.7.0:
   version "0.7.0"
